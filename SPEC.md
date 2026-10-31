@@ -5,14 +5,15 @@
 **対象者**: 中大路一（UI/UXデザイナー / 現Goens株式会社 CXO）
 
 ## 1. 技術スタック・制約
-- Astro + TypeScript + React（インタラクティブ部分のみ）
+- Astro + TypeScript（インタラクティブ部分は素のスクリプトで実装し、Reactは必要になった場合のみ追加）
 - スタイリング: Tailwind CSS
-- コンポーネント基盤: shadcn/uiを土台にスタイルをTailwindで置換
-- **デザインハーネス制約**:
+- コンポーネント基盤: Astroコンポーネントで自作（shadcn/uiは任意値を含むため不採用）
+- **デザインハーネス制約**（`npm run harness` で検査）:
   - Tailwindの任意値（`[10px]`など）は使用禁止
-  - 使用可能なカラーは **slate系のみ**（`slate-50`〜`slate-950`など）
-- 画像: 生成不要。後挿入用に `<!-- 画像を挿入する -->` または具体的なファイル名コメントを入れる
-- コンテンツ: Astro Content Collections（Markdown/MDX）で管理
+  - 使用可能なカラーは **gray系のみ**（`gray-50`〜`gray-950`、`white`）
+- 画像: `src/assets/` に置き `astro:assets` で最適化する
+- コンテンツ: Astro Content Collections（MDX）で管理
+- 仮原稿は frontmatter に `provisional: true` を付け、画面に「仮原稿」と表示する。`npm run harness -- --release` は仮原稿が残っていると失敗し、公開をブロックする
 - 開発支援: Claude Code（個人Proプラン想定）
 
 ## 2. サイトマップ
@@ -21,7 +22,7 @@
 /works                     Works一覧
 /works/goens               個別ケーススタディ: Goens
 /works/shehub              個別ケーススタディ: SheHub
-/works/creditengin         個別ケーススタディ: CreditEngin
+/works/creditengine        個別ケーススタディ: CreditEngine
 /works/edes                個別ケーススタディ: Edes
 /works/searchwrite         個別ケーススタディ: SearchWrite
 /works/castme              個別ケーススタディ: Castme
@@ -35,8 +36,14 @@
 
 ## 3. デザイン方針（トンマナ）
 参考: UPSIDER（https://corp.up-sider.com/ja）、みんなの銀行のコーポレートサイト（https://corporate.minna-no-ginko.com/）
+- 目的: 転職。事業会社のCEO・デザイナー採用担当が、書類審査・面接の通過を判断できる情報を短時間で渡す
+- みんなの銀行から: ロゴのフェード → ヒーローイメージ表示の見せ方、タイポグラフィ、余白、配色の考え方
+- UPSIDERから: スクロール時に要素がフェードインするアニメーション
+- ロゴ表記: Hajime Nakaooji（文字のみ）／ 言語: 日本語のみ ／ 連絡先: GitHubのみ
+- 独自ドメイン・アクセス解析は使用しない
+- 詳細ケーススタディ: Goens、SheHub、CreditEngine、イーデス。その他6件は短い形式
 - クリーンで余白多めのプロフェッショナルな印象
-- slate系を基調とした落ち着いた配色（白背景 + slateテキスト + アクセントはslateの濃淡）
+- gray系を基調とした落ち着いた配色（白背景 + grayテキスト + アクセントはgrayの濃淡）
 - タイポグラフィは読みやすさ重視、見出しはしっかり階層化
 - ヒーローはシンプルにメッセージを立てる（派手なビジュアルより信頼感）
 
@@ -131,22 +138,17 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 [タイトル: 職務経歴書]
 [説明文]
 [PDFダウンロードボタン]
-（PDF内にメールアドレスを記載）
 [Footer]
 ```
-PDFは添付の職務経歴書を使用。
+PDFは職務経歴書を使用。連絡先はGitHubのみ公開する。
 
 ## 5. コンテンツ管理
 - `src/content/works/` に各プロジェクトのMDXを配置
-- スキーマ例: title, role, period, challenge, process, outcome, images[]
-- 画像は `public/images/` に配置し、コメントで挿入位置を明示
+- スキーマ: `src/content.config.ts` を参照。本文の課題・プロセス・成果などはMDX本文に書く
+- 画像は `src/assets/` に配置
 
 ## 6. 非機能要件
 - Lighthouse 90+ 目標
 - レスポンシブ対応
 - 基本的なアクセシビリティ（コントラスト、セマンティックHTML）
-- デプロイ: GitHub ActionsでAstroビルド → Pages公開
-
----
-
-この仕様書をClaude Codeに渡す際は、リポジトリのルートに配置し「SPEC.mdを読んで実装して」と指示してください。
+- デプロイ: GitHub ActionsでAstroビルド → Pages公開（`https://nakaooji-hajime.github.io/portfolio/`）

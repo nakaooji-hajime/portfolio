@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../site';
+---
+
+<Base title="ページが見つかりません">
+  <div class="mx-auto max-w-4xl px-6 pt-24">
+    <h1 class="text-4xl font-bold text-gray-950">ページが見つかりません</h1>
+    <p class="mt-8"><a href={url()} class="text-gray-950 underline">ホームへ戻る</a></p>
+  </div>
+</Base>

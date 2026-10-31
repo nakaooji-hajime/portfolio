@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+
+const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Works" description="UI/UXデザイナー中大路一が携わったプロダクトの一覧。">
+  <div class="mx-auto max-w-6xl px-6 pt-24">
+    <h1 class="text-4xl font-bold text-gray-950">Works</h1>
+    <div class="mt-12 grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+      {works.map((work) => <WorkCard work={work} />)}
+    </div>
+  </div>
+</Base>

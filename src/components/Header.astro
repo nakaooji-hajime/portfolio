@@ -1,0 +1,34 @@
+---
+import { SITE, url } from '../site';
+
+const nav = [
+  { label: 'About', href: url('#about') },
+  { label: 'Works', href: url('works') },
+  { label: 'Process', href: url('process') },
+  { label: 'Resume', href: url('resume') },
+];
+const current = Astro.url.pathname;
+---
+
+<header class="border-b border-gray-200">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
+    <a href={url()} class="font-bold tracking-wide text-gray-950">{SITE.name}</a>
+    <nav aria-label="メイン">
+      <ul class="flex gap-6 text-sm text-gray-700">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="hover:text-gray-950 hover:underline"
+                aria-current={current.startsWith(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

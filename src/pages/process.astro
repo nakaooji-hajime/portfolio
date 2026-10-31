@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import ProvisionalNote from '../components/ProvisionalNote.astro';
+
+const abstractValues = [
+  { title: 'AIでは作れない独創的なクリエイティブ', body: '〔仮〕既存の学習データの延長にない表現で、ブランドの印象を決める。実例をここに記入。' },
+  { title: 'あえてのUX', body: '〔仮〕効率だけを見れば削るはずの手間を、体験価値のために残す判断。実例をここに記入。' },
+  { title: '既存外の施策・戦略提示', body: '〔仮〕与えられた課題の枠を超えて、事業の打ち手そのものを提案する。実例をここに記入。' },
+];
+---
+
+<Base title="Process" description="AIに任せること、デザイナーが担うこと。中大路一のデザインプロセス。">
+  <div class="mx-auto max-w-4xl px-6 pt-16">
+    <ProvisionalNote />
+    <h1 class="mt-8 text-4xl font-bold text-gray-950">デザインプロセスと役割</h1>
+    <p class="mt-8 leading-loose text-gray-700">
+      AIに任せられる部分は、基本的にAIに任せます。デザイナーの真価は、デザインシステムを言語化して自動化を進めること、そして言語化しにくい抽象度の高い領域で価値を出すことにあると考えています。
+    </p>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-950">AIに任せること</h2>
+      <p class="mt-4 leading-loose text-gray-700">
+        〔仮〕定義されたルールに沿う画面の実装、バリエーションの作成、定型的な検証など、基準を言葉にできる作業。
+      </p>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-950">デザイナーが担うこと</h2>
+      <ul class="mt-4 list-disc space-y-2 pl-6 leading-loose text-gray-700">
+        <li>デザインシステムの言語化とデザインハーネスへの反映</li>
+        <li>開発自動化の推進</li>
+      </ul>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-950">抽象度の高い領域での価値</h2>
+      <div class="mt-6 divide-y divide-gray-200 border-y border-gray-200">
+        {
+          abstractValues.map((item) => (
+            <div class="py-6">
+              <h3 class="font-bold text-gray-950">{item.title}</h3>
+              <p class="mt-2 leading-loose text-gray-700">{item.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Base>

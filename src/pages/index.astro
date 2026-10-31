@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { career, highlights, strengths } from '../data/career';
+import profile from '../assets/profile.png';
+import { url } from '../site';
+
+const featured = (await getCollection('works', (work) => work.data.featured)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base>
+  <section class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-3">
+    <div class="md:col-span-2">
+      <h1 class="text-4xl leading-tight font-bold text-gray-950 md:text-6xl md:leading-tight">
+        売上と体験を<br />同時に動かす<br />UI/UXデザイナー
+      </h1>
+      <p class="mt-8 max-w-2xl leading-loose text-gray-700">
+        WEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensのCXOとして、シニア向けマッチングサービス全体を統括しています。
+      </p>
+    </div>
+    <Image src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs" />
+  </section>
+
+  <section aria-label="主な実績" class="border-y border-gray-200 bg-gray-50">
+    <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4">
+      {
+        highlights.map((item) => (
+          <div>
+            <dt class="text-sm text-gray-600">{item.label}</dt>
+            <dd class="mt-2 text-xl font-bold text-gray-950">{item.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section id="about" class="mx-auto max-w-6xl scroll-mt-8 px-6 pt-24">
+    <h2 class="text-3xl font-bold text-gray-950">About</h2>
+    <div class="mt-8 grid gap-12 md:grid-cols-2">
+      <div class="space-y-4 leading-loose text-gray-700">
+        <p>
+          広告代理店・ITベンチャーでWEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensでシニア向けマッチングサービスのCXOとして、プロダクト全体を統括しています。
+        </p>
+        <p>
+          デザインだけでなく、ビジネス視点での施策立案、フロントエンド開発、データ分析、UXリサーチまで幅広く対応。マーケター・エンジニア・事業責任者と連携し、売上向上に貢献してきました。
+        </p>
+      </div>
+      <div>
+        <h3 class="font-bold text-gray-950">スキル・強み</h3>
+        <ul class="mt-4 list-disc space-y-2 pl-6 text-gray-700">
+          {strengths.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pt-24">
+    <h2 class="text-3xl font-bold text-gray-950">Career</h2>
+    <ol class="mt-8 divide-y divide-gray-200 border-y border-gray-200">
+      {
+        career.map((item) => (
+          <li class="grid gap-2 py-6 md:grid-cols-4 md:gap-8">
+            <p class="text-sm text-gray-600">{item.period}</p>
+            <div class="md:col-span-3">
+              <h3 class="font-bold text-gray-950">{item.company}</h3>
+              <p class="mt-1 leading-relaxed text-gray-700">{item.detail}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pt-24">
+    <h2 class="text-3xl font-bold text-gray-950">Works</h2>
+    <div class="mt-8 grid gap-12 md:grid-cols-2">
+      {featured.map((work) => <WorkCard work={work} />)}
+    </div>
+    <p class="mt-12">
+      <a href={url('works')} class="text-gray-950 underline">すべてのWorksを見る</a>
+    </p>
+  </section>
+</Base>
