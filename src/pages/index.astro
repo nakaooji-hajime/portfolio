@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { career, highlights, strengths } from '../data/career';
 import profile from '../assets/profile.png';
@@ -10,76 +11,148 @@ import { url } from '../site';
 const featured = (await getCollection('works', (work) => work.data.featured)).sort(
   (a, b) => a.data.order - b.data.order,
 );
+
+// 実績の見せ方。先頭の実績を最も大きく見せる
+const tileStyles = [
+  { span: 'lg:col-span-4', tone: 'bg-gray-950 text-white', labelTone: 'text-gray-300', size: 'text-7xl md:text-9xl' },
+  { span: 'lg:col-span-2', tone: 'bg-gray-100 text-gray-950', labelTone: 'text-gray-700', size: 'text-7xl md:text-8xl' },
+  { span: 'lg:col-span-3', tone: 'bg-gray-100 text-gray-950', labelTone: 'text-gray-700', size: 'text-7xl md:text-8xl' },
+  { span: 'lg:col-span-3', tone: 'bg-gray-100 text-gray-950', labelTone: 'text-gray-700', size: 'text-7xl md:text-8xl' },
+];
+const tiles = highlights.flatMap((item, i) => {
+  const style = tileStyles[i];
+  return style ? [{ ...item, ...style }] : [];
+});
+
+const today = new Date();
+const now = today.getFullYear() + today.getMonth() / 12;
+const first = Math.min(...career.map((item) => item.start));
+const percent = (value: number) => ((value - first) / (now - first)) * 100;
+const firstYear = Math.floor(first);
 ---
 
-<Base>
-  <section class="mx-auto max-w-6xl px-6 py-24">
-    <h1 class="text-4xl leading-tight font-bold text-gray-950 md:text-6xl md:leading-tight">
-      売上と体験を<br />同時に動かす<br />UI/UXデザイナー
-    </h1>
-    <p class="mt-8 max-w-2xl leading-loose text-gray-700">
-      WEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensのCXOとして、シニア向けマッチングサービス全体を統括しています。
+<Base overlayHeader>
+  <script is:inline slot="head">
+    try {
+      if (sessionStorage.getItem('intro-seen')) document.documentElement.classList.add('intro-seen');
+      else sessionStorage.setItem('intro-seen', '1');
+    } catch {
+      // 保存できない環境では毎回ロゴの演出を再生する
+    }
+  </script>
+
+  <Hero />
+
+  <section class="mx-auto max-w-6xl px-6 py-24 md:py-40">
+    <h2 data-reveal class="text-3xl leading-snug font-bold text-gray-950 md:text-5xl md:leading-snug">
+      <span class="inline-block">前提を疑い、</span><span class="inline-block">新たな視点も大事にする</span>
+    </h2>
+    <p data-reveal class="mt-10 max-w-2xl leading-loose text-gray-950 md:mt-16 md:text-lg md:leading-loose">
+      デザイナー人生を振り返ると、大きな成果を作れた時は、いつも新たな挑戦に挑んだ時でした。その業界・組織では考えつかなかった、AIのロジカルな改善提案には出てこなかった。「そんなことやっていいんだっけ？」「やったことないから分からない」。そんな声の中、たくさん失敗もしましたが、大きな成功も生むことができました。「前提を疑い、新たな視点も大事にする」そんな考えを大事にデザインに取り組んでいます。
     </p>
   </section>
 
-  <section id="about" class="mx-auto max-w-6xl scroll-mt-8 px-6">
-    <h2 class="text-3xl font-bold text-gray-950">About</h2>
-    <div class="mt-8 grid gap-12 md:grid-cols-3">
-      <Image src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs" />
-      <div class="space-y-4 leading-loose text-gray-700">
-        <p>
-          広告代理店・ITベンチャーでWEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensでシニア向けマッチングサービスのCXOとして、プロダクト全体を統括しています。
-        </p>
-        <p>
-          デザインだけでなく、ビジネス視点での施策立案、フロントエンド開発、データ分析、UXリサーチまで幅広く対応。マーケター・エンジニア・事業責任者と連携し、売上向上に貢献してきました。
-        </p>
-      </div>
-      <div>
-        <h3 class="font-bold text-gray-950">スキル・強み</h3>
-        <ul class="mt-4 list-disc space-y-2 pl-6 text-gray-700">
-          {strengths.map((item) => <li>{item}</li>)}
-        </ul>
+  <section id="about" class="scroll-mt-8 border-t border-gray-200">
+    <div class="mx-auto max-w-6xl px-6 py-24 md:py-40">
+      <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">About</h2>
+      <div class="mt-12 grid gap-12 md:mt-20 md:grid-cols-3 md:gap-16">
+        <div data-reveal>
+          <Image src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs" />
+        </div>
+        <div class="md:col-span-2">
+          <div data-reveal class="space-y-6 leading-loose text-gray-700 md:text-lg md:leading-loose">
+            <p>
+              広告代理店・ITベンチャーでWEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensでシニア向けマッチングサービスのCXOとして、プロダクト全体を統括しています。
+            </p>
+            <p>
+              デザインだけでなく、ビジネス視点での施策立案、フロントエンド開発、データ分析、UXリサーチまで幅広く対応。マーケター・エンジニア・事業責任者と連携し、売上向上に貢献してきました。
+            </p>
+          </div>
+          <div data-reveal class="mt-12 md:mt-16">
+            <h3 class="font-bold text-gray-950">スキル・強み</h3>
+            <ul class="mt-4 divide-y divide-gray-200 border-y border-gray-200 text-gray-700">
+              {strengths.map((item) => <li class="py-4">{item}</li>)}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-6 pt-24">
-    <h2 class="text-3xl font-bold text-gray-950">Career</h2>
-    <dl class="mt-8 grid grid-cols-2 gap-px border border-gray-200 bg-gray-200 lg:grid-cols-4">
+  <section class="bg-gray-50">
+    <div class="mx-auto max-w-6xl px-6 py-24 md:py-40">
+      <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">Career</h2>
+      <dl class="mt-12 grid gap-4 md:mt-20 md:grid-cols-2 lg:grid-cols-6">
+        {
+          tiles.map((item, i) => (
+            <div
+              data-reveal
+              class:list={[
+                'flex min-h-64 flex-col-reverse justify-between gap-8 p-8 md:p-10',
+                item.span,
+                item.tone,
+                i === 0 && 'md:col-span-2',
+              ]}
+            >
+              <dt class:list={['text-sm leading-relaxed', item.labelTone]}>{item.label}</dt>
+              <dd class="font-bold">
+                <span data-count={item.value.replaceAll(',', '')} class:list={['tracking-tight tabular-nums', item.size]}>
+                  {item.value}
+                </span>
+                <span class="ml-1 text-lg md:text-2xl">{item.unit}</span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div class="mt-24 md:mt-32">
+        <h3 data-reveal class="font-bold text-gray-950">経歴</h3>
+        <ol class="mt-6 divide-y divide-gray-200 border-y border-gray-200">
+          {
+            career.map((item) => (
+              <li data-reveal class="grid gap-2 py-8 md:grid-cols-4 md:gap-8">
+                <p class="text-sm leading-relaxed text-gray-600">{item.period}</p>
+                <div class="md:col-span-3">
+                  <h4 class="font-bold text-gray-950">{item.company}</h4>
+                  <p class="mt-2 leading-loose text-gray-700">{item.detail}</p>
+                  <div class="relative mt-6 h-1 bg-gray-200" aria-hidden="true">
+                    <span
+                      class="career-bar absolute inset-y-0 bg-gray-950"
+                      style={`left:${percent(item.start)}%;width:${percent(item.end ?? now) - percent(item.start)}%`}
+                    />
+                  </div>
+                  <div class="mt-2 flex justify-between text-xs text-gray-600" aria-hidden="true">
+                    <span>{firstYear}</span>
+                    <span>現在</span>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pt-24 md:pt-40">
+    <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">Works</h2>
+    <div class="mt-12 grid gap-16 md:mt-20 md:grid-cols-2 md:gap-x-8">
       {
-        highlights.map((item) => (
-          <div class="flex flex-col-reverse justify-end gap-3 bg-gray-50 p-6">
-            <dt class="text-sm text-gray-600">{item.label}</dt>
-            <dd class="font-bold text-gray-950">
-              <span class="text-5xl md:text-6xl">{item.value}</span>
-              <span class="text-lg">{item.unit}</span>
-            </dd>
+        featured.map((work) => (
+          <div data-reveal>
+            <WorkCard work={work} />
           </div>
         ))
       }
-    </dl>
-    <ol class="mt-12 divide-y divide-gray-200 border-y border-gray-200">
-      {
-        career.map((item) => (
-          <li class="grid gap-2 py-6 md:grid-cols-4 md:gap-8">
-            <p class="text-sm text-gray-600">{item.period}</p>
-            <div class="md:col-span-3">
-              <h3 class="font-bold text-gray-950">{item.company}</h3>
-              <p class="mt-1 leading-relaxed text-gray-700">{item.detail}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
-
-  <section class="mx-auto max-w-6xl px-6 pt-24">
-    <h2 class="text-3xl font-bold text-gray-950">Works</h2>
-    <div class="mt-8 grid gap-12 md:grid-cols-2">
-      {featured.map((work) => <WorkCard work={work} />)}
     </div>
-    <p class="mt-12">
-      <a href={url('works')} class="text-gray-950 underline">すべてのWorksを見る</a>
+    <p data-reveal class="mt-16 md:mt-24">
+      <a
+        href={url('works')}
+        class="inline-block bg-gray-950 px-8 py-4 font-bold text-white transition-colors hover:bg-gray-700"
+      >
+        すべてのWorksを見る
+      </a>
     </p>
   </section>
 </Base>

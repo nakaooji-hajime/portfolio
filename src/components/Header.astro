@@ -1,6 +1,12 @@
 ---
 import { SITE, url } from '../site';
 
+interface Props {
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+
 const nav = [
   { label: 'About', href: url('#about') },
   { label: 'Works', href: url('works') },
@@ -8,20 +14,21 @@ const nav = [
   { label: 'Resume', href: url('resume') },
 ];
 const current = Astro.url.pathname;
+const isCurrent = (href: string) => current.startsWith(href);
 ---
 
-<header class="border-b border-gray-200">
+<header class:list={overlay ? 'hero-fade absolute inset-x-0 top-0 z-10 text-white' : 'border-b border-gray-200'}>
   <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
-    <a href={url()} class="font-bold tracking-wide text-gray-950">{SITE.name}</a>
+    <a href={url()} class:list={['font-bold tracking-wide', !overlay && 'text-gray-950']}>{SITE.name}</a>
     <nav aria-label="メイン">
-      <ul class="flex gap-6 text-sm text-gray-700">
+      <ul class:list={['flex gap-6 text-sm', !overlay && 'text-gray-700']}>
         {
           nav.map((item) => (
             <li>
               <a
                 href={item.href}
-                class="hover:text-gray-950 hover:underline"
-                aria-current={current.startsWith(item.href) ? 'page' : undefined}
+                class:list={['hover:underline', !overlay && 'hover:text-gray-950', isCurrent(item.href) && 'font-bold text-gray-950']}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
               >
                 {item.label}
               </a>

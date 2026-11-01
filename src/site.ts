@@ -1,6 +1,6 @@
 export const SITE = {
-  name: 'Hajime Nakaooji',
-  description: '売上と体験を同時に動かすUI/UXデザイナー、中大路一のポートフォリオ。',
+  name: 'Nakaooji Hajime',
+  description: '新たな視点で成果に繋げるUI/UXデザイナー、中大路一のポートフォリオ。',
   github: 'https://github.com/nakaooji-hajime',
   repoFile: 'https://github.com/nakaooji-hajime/portfolio/blob/main/',
   resumePdf: 'resume/nakaooji-hajime-resume.pdf',

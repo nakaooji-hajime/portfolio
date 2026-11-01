@@ -15,15 +15,15 @@
   --color-gray-800: oklch(27.8% 0.033 256.848);
   --color-gray-900: oklch(21% 0.034 264.665);
   --color-gray-950: oklch(13% 0.028 261.692);
-  --font-sans: 'Noto Sans JP Variable', sans-serif;
+  --font-sans: 'Plus Jakarta Sans Variable', 'Noto Sans JP Variable', sans-serif;
 }
 
 .case-body h2 {
-  @apply mt-16 text-2xl font-bold text-gray-950;
+  @apply mt-24 text-2xl font-bold text-gray-950 md:text-4xl;
 }
 
 .case-body p {
-  @apply mt-4 leading-loose text-gray-700;
+  @apply mt-6 leading-loose text-gray-700 md:text-lg md:leading-loose;
 }
 
 .case-body img {
@@ -32,4 +32,129 @@
 
 .case-body ul {
   @apply mt-4 list-disc space-y-2 pl-6 leading-loose text-gray-700;
+}
+
+/* 演出 */
+:root {
+  --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --hero-start: 1.9s;
+}
+
+.intro-seen {
+  --hero-start: 0s;
+}
+
+.intro {
+  animation: intro-out 0.5s 1.4s both;
+}
+
+.intro-seen .intro {
+  display: none;
+}
+
+.intro-logo {
+  animation: intro-logo 1.4s ease both;
+}
+
+.hero-bg {
+  background: radial-gradient(circle at 70% 30%, var(--color-gray-600), var(--color-gray-950) 70%);
+}
+
+.hero-fade {
+  animation: fade 0.8s var(--hero-start) both;
+}
+
+.hero-sub {
+  animation: fade 1s calc(var(--hero-start) + 0.7s) both;
+}
+
+.hero-line > span {
+  display: block;
+  animation: rise 1s var(--ease-soft) calc(var(--hero-start) + 0.2s + var(--i) * 0.16s) both;
+}
+
+.js [data-reveal],
+.js .case-body > * {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition:
+    opacity 1s var(--ease-soft),
+    transform 1s var(--ease-soft);
+}
+
+.js [data-reveal].is-in,
+.js .case-body > .is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.career-bar {
+  transform-origin: left;
+}
+
+.js .career-bar {
+  transform: scaleX(0);
+  transition: transform 1.2s var(--ease-soft) 0.2s;
+}
+
+.js .is-in .career-bar {
+  transform: none;
+}
+
+@keyframes intro-logo {
+  0% {
+    opacity: 0;
+  }
+  40%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+
+  .hero-fade,
+  .hero-sub,
+  .hero-line > span {
+    animation: none;
+  }
+
+  .js [data-reveal],
+  .js .case-body > *,
+  .js .career-bar {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

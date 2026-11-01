@@ -42,6 +42,6 @@
 
 ## 表記
 
-- ロゴと氏名の英字は Hajime Nakaooji
+- ロゴと氏名の英字は Nakaooji Hajime
 - サービス名は CreditEngine、イーデス など正式な表記に合わせる
 - 公開する連絡先は GitHub のみ

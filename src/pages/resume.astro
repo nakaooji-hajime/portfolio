@@ -1,20 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
 import { SITE, url } from '../site';
 ---
 
 <Base title="Resume" description="中大路一の職務経歴書（PDF）。">
-  <div class="mx-auto max-w-4xl px-6 pt-24">
-    <h1 class="text-4xl font-bold text-gray-950">職務経歴書</h1>
-    <p class="mt-8 leading-loose text-gray-700">
-      これまでの経歴、担当範囲、実績をまとめた職務経歴書をPDFでご覧いただけます。
+  <div class="mx-auto max-w-4xl px-6 pt-16 md:pt-32">
+    <PageHeader lead="これまでの経歴、担当範囲、実績をまとめた職務経歴書をPDFでご覧いただけます。">職務経歴書</PageHeader>
+    <p data-reveal class="mt-12">
+      <a
+        href={url(SITE.resumePdf)}
+        download
+        class="inline-block bg-gray-950 px-8 py-4 font-bold text-white transition-colors hover:bg-gray-700"
+      >
+        PDFをダウンロード
+      </a>
     </p>
-    <a
-      href={url(SITE.resumePdf)}
-      download
-      class="mt-8 inline-block bg-gray-950 px-8 py-4 font-bold text-white hover:bg-gray-700"
-    >
-      PDFをダウンロード
-    </a>
   </div>
 </Base>
