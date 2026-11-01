@@ -1,49 +1,85 @@
 ---
 import Base from '../layouts/Base.astro';
 import ProvisionalNote from '../components/ProvisionalNote.astro';
+import { SITE } from '../site';
 
-const abstractValues = [
-  { title: 'AIでは作れない独創的なクリエイティブ', body: '〔仮〕既存の学習データの延長にない表現で、ブランドの印象を決める。実例をここに記入。' },
-  { title: 'あえてのUX', body: '〔仮〕効率だけを見れば削るはずの手間を、体験価値のために残す判断。実例をここに記入。' },
-  { title: '既存外の施策・戦略提示', body: '〔仮〕与えられた課題の枠を超えて、事業の打ち手そのものを提案する。実例をここに記入。' },
+const shift = [
+  { label: 'これまで', title: 'デザインシステムで、人を制御する', body: 'コンポーネントやガイドラインを整え、デザイナーとエンジニアの判断を揃えてきました。' },
+  { label: 'これから', title: 'デザインハーネスで、AIを制御する', body: 'design.mdやcontents.mdなどにルールを書き、AIの自動開発がその範囲で動くようにします。' },
+];
+
+const roles = [
+  { title: 'デザイン仕様の言語化とハーネス化', body: '「なんとなく良い」を、AIが守れるルールと、機械で検査できる仕組みに変えます。これにより、人が細部を確認しなくても品質が揃う範囲を広げます。' },
+  { title: 'AIでは提案できない新規施策やグレーパターンの提案', body: '過去の正解の延長にない施策や、定石どおりではないものの事業とユーザーに効くパターンを、当事者の文脈から提案します。' },
+];
+
+const files = [
+  { name: 'design.md', body: '色、タイポグラフィ、余白、コンポーネントのルール' },
+  { name: 'contents.md', body: '読者、文体、数値の書き方、ページ構成のルール' },
+  { name: 'scripts/harness.mjs', body: 'ルール違反を機械的に検出するスクリプト' },
 ];
 ---
 
-<Base title="Process" description="AIに任せること、デザイナーが担うこと。中大路一のデザインプロセス。">
+<Base title="Process" description="デザインハーネスでAIの自動開発を制御し、事業の成長につなげる。中大路一のデザインプロセス。">
   <div class="mx-auto max-w-4xl px-6 pt-16">
     <ProvisionalNote />
-    <h1 class="mt-8 text-4xl font-bold text-gray-950">デザインプロセスと役割</h1>
+    <h1 class="mt-8 text-4xl leading-tight font-bold text-gray-950">
+      人を揃えるデザインから、<br />AIを制御するデザインへ
+    </h1>
     <p class="mt-8 leading-loose text-gray-700">
-      AIに任せられる部分は、基本的にAIに任せます。デザイナーの真価は、デザインシステムを言語化して自動化を進めること、そして言語化しにくい抽象度の高い領域で価値を出すことにあると考えています。
+      AIが開発を担うようになると、デザイナーの仕事は画面を作ることから、AIが正しく作れる条件を整えること、そしてAIが思いつかない打ち手を出すことへ移っていくと考えています。
     </p>
 
     <section class="mt-16">
-      <h2 class="text-2xl font-bold text-gray-950">AIに任せること</h2>
-      <p class="mt-4 leading-loose text-gray-700">
-        〔仮〕定義されたルールに沿う画面の実装、バリエーションの作成、定型的な検証など、基準を言葉にできる作業。
-      </p>
-    </section>
-
-    <section class="mt-16">
-      <h2 class="text-2xl font-bold text-gray-950">デザイナーが担うこと</h2>
-      <ul class="mt-4 list-disc space-y-2 pl-6 leading-loose text-gray-700">
-        <li>デザインシステムの言語化とデザインハーネスへの反映</li>
-        <li>開発自動化の推進</li>
-      </ul>
-    </section>
-
-    <section class="mt-16">
-      <h2 class="text-2xl font-bold text-gray-950">抽象度の高い領域での価値</h2>
-      <div class="mt-6 divide-y divide-gray-200 border-y border-gray-200">
+      <h2 class="text-2xl font-bold text-gray-950">制御する対象が変わる</h2>
+      <div class="mt-6 grid gap-6 md:grid-cols-2">
         {
-          abstractValues.map((item) => (
-            <div class="py-6">
-              <h3 class="font-bold text-gray-950">{item.title}</h3>
-              <p class="mt-2 leading-loose text-gray-700">{item.body}</p>
+          shift.map((item) => (
+            <div class="border border-gray-200 p-6">
+              <p class="text-sm text-gray-600">{item.label}</p>
+              <h3 class="mt-2 font-bold text-gray-950">{item.title}</h3>
+              <p class="mt-3 leading-loose text-gray-700">{item.body}</p>
             </div>
           ))
         }
       </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-950">デザイナーの仕事は2つになる</h2>
+      <ol class="mt-6 divide-y divide-gray-200 border-y border-gray-200">
+        {
+          roles.map((item, index) => (
+            <li class="py-6">
+              <h3 class="font-bold text-gray-950">{index + 1}. {item.title}</h3>
+              <p class="mt-2 leading-loose text-gray-700">{item.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-950">事業の成長につなげる</h2>
+      <p class="mt-4 leading-loose text-gray-700">
+        ハーネスで開発の速度と品質を揃え、そこで生まれた時間を新規施策の検討と検証に使う。この循環で、デザインを事業の成長につなげていきます。
+      </p>
+      <p class="mt-4 leading-loose text-gray-700">〔仮〕実例と成果をここに記入。</p>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-bold text-gray-950">ハーネスの実物</h2>
+      <p class="mt-4 leading-loose text-gray-700">このサイトの制作で実際に使っているファイルを公開しています。</p>
+      <ul class="mt-6 divide-y divide-gray-200 border-y border-gray-200">
+        {
+          files.map((file) => (
+            <li class="py-4">
+              <a href={`${SITE.repoFile}${file.name}`} class="font-bold text-gray-950 underline">{file.name}</a>
+              <p class="mt-1 text-sm text-gray-600">{file.body}</p>
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </div>
 </Base>

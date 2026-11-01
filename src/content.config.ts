@@ -17,7 +17,6 @@ const works = defineCollection({
       featured: z.boolean(),
       provisional: z.boolean(),
       thumbnail: image(),
-      screenshot: image().optional(),
       metrics: z.array(z.object({ value: z.string(), label: z.string() })),
     }),
 });

@@ -26,6 +26,10 @@
   @apply mt-4 leading-loose text-gray-700;
 }
 
+.case-body img {
+  @apply mt-16 w-full border border-gray-200;
+}
+
 .case-body ul {
   @apply mt-4 list-disc space-y-2 pl-6 leading-loose text-gray-700;
 }

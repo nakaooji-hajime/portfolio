@@ -13,34 +13,19 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
 ---
 
 <Base>
-  <section class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-3">
-    <div class="md:col-span-2">
-      <h1 class="text-4xl leading-tight font-bold text-gray-950 md:text-6xl md:leading-tight">
-        売上と体験を<br />同時に動かす<br />UI/UXデザイナー
-      </h1>
-      <p class="mt-8 max-w-2xl leading-loose text-gray-700">
-        WEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensのCXOとして、シニア向けマッチングサービス全体を統括しています。
-      </p>
-    </div>
-    <Image src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs" />
+  <section class="mx-auto max-w-6xl px-6 py-24">
+    <h1 class="text-4xl leading-tight font-bold text-gray-950 md:text-6xl md:leading-tight">
+      売上と体験を<br />同時に動かす<br />UI/UXデザイナー
+    </h1>
+    <p class="mt-8 max-w-2xl leading-loose text-gray-700">
+      WEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensのCXOとして、シニア向けマッチングサービス全体を統括しています。
+    </p>
   </section>
 
-  <section aria-label="主な実績" class="border-y border-gray-200 bg-gray-50">
-    <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4">
-      {
-        highlights.map((item) => (
-          <div>
-            <dt class="text-sm text-gray-600">{item.label}</dt>
-            <dd class="mt-2 text-xl font-bold text-gray-950">{item.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
-  </section>
-
-  <section id="about" class="mx-auto max-w-6xl scroll-mt-8 px-6 pt-24">
+  <section id="about" class="mx-auto max-w-6xl scroll-mt-8 px-6">
     <h2 class="text-3xl font-bold text-gray-950">About</h2>
-    <div class="mt-8 grid gap-12 md:grid-cols-2">
+    <div class="mt-8 grid gap-12 md:grid-cols-3">
+      <Image src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs" />
       <div class="space-y-4 leading-loose text-gray-700">
         <p>
           広告代理店・ITベンチャーでWEB・アプリ・SaaSのプロダクトデザイン、グロース、新規事業立ち上げを経験。現在はGoensでシニア向けマッチングサービスのCXOとして、プロダクト全体を統括しています。
@@ -60,7 +45,20 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
 
   <section class="mx-auto max-w-6xl px-6 pt-24">
     <h2 class="text-3xl font-bold text-gray-950">Career</h2>
-    <ol class="mt-8 divide-y divide-gray-200 border-y border-gray-200">
+    <dl class="mt-8 grid grid-cols-2 gap-px border border-gray-200 bg-gray-200 lg:grid-cols-4">
+      {
+        highlights.map((item) => (
+          <div class="flex flex-col-reverse justify-end gap-3 bg-gray-50 p-6">
+            <dt class="text-sm text-gray-600">{item.label}</dt>
+            <dd class="font-bold text-gray-950">
+              <span class="text-5xl md:text-6xl">{item.value}</span>
+              <span class="text-lg">{item.unit}</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+    <ol class="mt-12 divide-y divide-gray-200 border-y border-gray-200">
       {
         career.map((item) => (
           <li class="grid gap-2 py-6 md:grid-cols-4 md:gap-8">

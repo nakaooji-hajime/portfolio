@@ -8,10 +8,10 @@ export const career = [
 ];
 
 export const highlights = [
-  { value: '月商2,000万円', label: 'Goens ローンチ3年' },
-  { value: '18万人', label: 'Goens 登録者数' },
-  { value: '月商1億円増収', label: 'カードローン比較サイト 半年のLPO' },
-  { value: '10年以上', label: 'デザイナーとしての経験' },
+  { value: '2,000', unit: '万円', label: 'Goens 月商（ローンチ3年）' },
+  { value: '18', unit: '万人', label: 'Goens 登録者数' },
+  { value: '1', unit: '億円', label: 'カードローン比較サイト 月商の増収（半年のLPO）' },
+  { value: '10', unit: '年以上', label: 'デザイナーとしての経験' },
 ];
 
 export const strengths = [
