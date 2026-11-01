@@ -40,25 +40,34 @@ const { Content } = await render(work);
         <PageHeader lead={subtitle}>{title}</PageHeader>
       </div>
       <dl data-reveal class="mt-12 grid gap-6 border-y border-gray-200 py-8 text-sm md:grid-cols-3">
-        <div><dt class="text-gray-600">所属</dt><dd class="mt-1 leading-relaxed text-gray-950">{company}</dd></div>
-        <div><dt class="text-gray-600">役割</dt><dd class="mt-1 leading-relaxed text-gray-950">{role}</dd></div>
-        <div><dt class="text-gray-600">期間</dt><dd class="mt-1 leading-relaxed text-gray-950">{period}</dd></div>
+        <div>
+          <dt class="text-gray-600">所属</dt>
+          <dd class="mt-1 leading-relaxed text-gray-950">{company}</dd>
+        </div>
+        <div>
+          <dt class="text-gray-600">役割</dt>
+          <dd class="mt-1 leading-relaxed text-gray-950">{role}</dd>
+        </div>
+        <div>
+          <dt class="text-gray-600">期間</dt>
+          <dd class="mt-1 leading-relaxed text-gray-950">{period}</dd>
+        </div>
       </dl>
       <dl class:list={['mt-12 grid gap-4', metrics.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3']}>
-        {
-          metrics.map((metric, i) => (
-            <div
-              data-reveal
-              class:list={[
-                'flex min-h-48 flex-col-reverse justify-between gap-8 p-8',
-                i === 0 ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-950',
-              ]}
-            >
-              <dt class:list={['text-sm leading-relaxed', i === 0 ? 'text-gray-300' : 'text-gray-700']}>{metric.label}</dt>
-              <dd class="text-3xl leading-tight font-bold">{metric.value}</dd>
-            </div>
-          ))
-        }
+        {metrics.map((metric, i) => (
+          <div
+            data-reveal
+            class:list={[
+              'flex min-h-48 flex-col-reverse justify-between gap-8 p-8',
+              i === 0 ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-950',
+            ]}
+          >
+            <dt class:list={['text-sm leading-relaxed', i === 0 ? 'text-gray-300' : 'text-gray-700']}>
+              {metric.label}
+            </dt>
+            <dd class="text-3xl leading-tight font-bold">{metric.value}</dd>
+          </div>
+        ))}
       </dl>
       <div class="case-body">
         <Content />
@@ -67,27 +76,29 @@ const { Content } = await render(work);
 
     <nav aria-label="前後のWorks" class="mx-auto mt-24 max-w-6xl px-6 md:mt-40">
       <div class="grid gap-4 md:grid-cols-2">
-        {
-          prev ? (
-            <a data-reveal href={url(`works/${prev.id}`)} class="bg-gray-100 p-8 transition-colors hover:bg-gray-200">
-              <span class="text-sm text-gray-700">← 前の事例</span>
-              <span class="mt-2 block text-2xl font-bold text-gray-950">{prev.data.title}</span>
-            </a>
-          ) : (
-            <span class="hidden md:block" />
-          )
-        }
-        {
-          next && (
-            <a data-reveal href={url(`works/${next.id}`)} class="bg-gray-100 p-8 text-right transition-colors hover:bg-gray-200">
-              <span class="text-sm text-gray-700">次の事例 →</span>
-              <span class="mt-2 block text-2xl font-bold text-gray-950">{next.data.title}</span>
-            </a>
-          )
-        }
+        {prev ? (
+          <a data-reveal href={url(`works/${prev.id}`)} class="bg-gray-100 p-8 transition-colors hover:bg-gray-200">
+            <span class="text-sm text-gray-700">← 前の事例</span>
+            <span class="mt-2 block text-2xl font-bold text-gray-950">{prev.data.title}</span>
+          </a>
+        ) : (
+          <span class="hidden md:block" />
+        )}
+        {next && (
+          <a
+            data-reveal
+            href={url(`works/${next.id}`)}
+            class="bg-gray-100 p-8 text-right transition-colors hover:bg-gray-200"
+          >
+            <span class="text-sm text-gray-700">次の事例 →</span>
+            <span class="mt-2 block text-2xl font-bold text-gray-950">{next.data.title}</span>
+          </a>
+        )}
       </div>
       <p class="mt-8 text-center">
-        <a href={url('works')} class="text-gray-950 underline">Works一覧へ戻る</a>
+        <a href={url('works')} class="text-gray-950 underline">
+          Works一覧へ戻る
+        </a>
       </p>
     </nav>
   </article>

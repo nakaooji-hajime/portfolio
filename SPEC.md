@@ -5,6 +5,7 @@
 **対象者**: 中大路一（UI/UXデザイナー / 現Goens株式会社 CXO）
 
 ## 1. 技術スタック・制約
+
 - Astro + TypeScript（インタラクティブ部分は素のスクリプトで実装し、Reactは必要になった場合のみ追加）
 - スタイリング: Tailwind CSS
 - コンポーネント基盤: Astroコンポーネントで自作（shadcn/uiは任意値を含むため不採用）
@@ -17,6 +18,7 @@
 - 開発支援: Claude Code（個人Proプラン想定）
 
 ## 2. サイトマップ
+
 ```
 /                          ホーム（About + Career + Worksハイライト）
 /works                     Works一覧
@@ -35,7 +37,9 @@
 ```
 
 ## 3. デザイン方針（トンマナ）
+
 参考: UPSIDER（https://corp.up-sider.com/ja）、みんなの銀行のコーポレートサイト（https://corporate.minna-no-ginko.com/）
+
 - 目的: 転職。事業会社のCEO・デザイナー採用担当が、書類審査・面接の通過を判断できる情報を短時間で渡す
 - みんなの銀行から: ロゴのフェード → ヒーローイメージ表示の見せ方、タイポグラフィ、余白、配色の考え方
 - UPSIDERから: スクロール時に要素がフェードインするアニメーション
@@ -51,7 +55,9 @@
 ## 4. ページ別ワイヤーフレーム & 原稿
 
 ### 4.1 ホーム (`/`)
+
 **ワイヤーフレーム**
+
 ```
 [Header: ロゴ / ナビ（About, Works, Process, Resume）]
 [Hero]
@@ -73,6 +79,7 @@
 ```
 
 **原稿（抜粋）**
+
 - キャッチ: 「新たな視点で／成果に繋げる」
 - サブキャッチ: Nakaooji Hajime UI/UX Portfolio Site
 - メッセージ見出し: 「前提を疑い、新たな視点も大事にする」
@@ -81,7 +88,9 @@
 - Career要約: 2011年フリーランスイラストレーター → 2015年プラスワン（メディア立ち上げ） → 2018年エイチームフィナジー（カードローン比較サイトで月商1億円増収、デザイン組織マネジメント） → 2021年PLAN-B → 2022年エイチームライフデザイン → 2023年〜 Goens（ローンチ3年で月商2,000万円・登録者18万人）。
 
 ### 4.2 Works一覧 (`/works`)
+
 **ワイヤーフレーム**
+
 ```
 [Header]
 [ページタイトル: Works]
@@ -90,11 +99,14 @@
   各カード: サムネイル / タイトル / 役割 / 短い成果 / 「詳細を見る」
 [Footer]
 ```
+
 Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-id=25-545）を参考に実装。  
 使用画像: 各プロジェクトの `*-thumbnail.png`
 
 ### 4.3 個別ケーススタディ（例: `/works/goens`）
+
 **共通ワイヤーフレーム**
+
 ```
 [Header]
 [ファーストビュー: goens-thumbnail.png]
@@ -109,6 +121,7 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 ```
 
 **原稿例（Goens）**
+
 - タイトル: Goens - 50代以上限定マッチングサービス
 - 役割: CXO / PM / UI/UX / 開発（React Native） / CS
 - 概要: シニア世代の孤独解消と真剣な出会いを実現するマッチングアプリの立ち上げ・運営。
@@ -120,7 +133,9 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 （他のプロジェクトも同様のフォーマットで、職務経歴書の実績を基に「課題→プロセス→成果」を記述。デザインの見た目より成果と意思決定にフォーカス）
 
 ### 4.4 Process / Approach (`/process`)
+
 **ワイヤーフレーム**
+
 ```
 [Header]
 [タイトル: 人を揃えるデザインから、AIを制御するデザインへ]
@@ -141,7 +156,9 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 デザイナーの仕事は、デザイン仕様の言語化とハーネス化、そしてAIでは提案できない新規施策の提案になっていく。その方向性で事業の成長につなげる。
 
 ### 4.5 Resume (`/resume`)
+
 **ワイヤーフレーム**
+
 ```
 [Header]
 [タイトル: 職務経歴書]
@@ -149,14 +166,17 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 [PDFダウンロードボタン]
 [Footer]
 ```
+
 PDFは職務経歴書を使用。連絡先はGitHubのみ公開する。
 
 ## 5. コンテンツ管理
+
 - `src/content/works/` に各プロジェクトのMDXを配置
 - スキーマ: `src/content.config.ts` を参照。本文の課題・プロセス・成果などはMDX本文に書く
 - 画像は `src/assets/` に配置
 
 ## 6. 非機能要件
+
 - Lighthouse 90+ 目標
 - レスポンシブ対応
 - 基本的なアクセシビリティ（コントラスト、セマンティックHTML）

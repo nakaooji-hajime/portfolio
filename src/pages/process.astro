@@ -5,13 +5,27 @@ import ProvisionalNote from '../components/ProvisionalNote.astro';
 import { SITE } from '../site';
 
 const shift = [
-  { label: 'これまで', title: 'デザインシステムで、人を制御する', body: 'コンポーネントやガイドラインを整え、デザイナーとエンジニアの判断を揃えてきました。' },
-  { label: 'これから', title: 'デザインハーネスで、AIを制御する', body: 'design.mdやcontents.mdなどにルールを書き、AIの自動開発がその範囲で動くようにします。' },
+  {
+    label: 'これまで',
+    title: 'デザインシステムで、人を制御する',
+    body: 'コンポーネントやガイドラインを整え、デザイナーとエンジニアの判断を揃えてきました。',
+  },
+  {
+    label: 'これから',
+    title: 'デザインハーネスで、AIを制御する',
+    body: 'design.mdやcontents.mdなどにルールを書き、AIの自動開発がその範囲で動くようにします。',
+  },
 ];
 
 const roles = [
-  { title: 'デザイン仕様の言語化とハーネス化', body: '「なんとなく良い」を、AIが守れるルールと、機械で検査できる仕組みに変えます。これにより、人が細部を確認しなくても品質が揃う範囲を広げます。' },
-  { title: 'AIでは提案できない新規施策の提案', body: '過去の正解の延長にない施策や、定石から外れていても事業とユーザーに効く打ち手を、当事者の文脈から提案します。' },
+  {
+    title: 'デザイン仕様の言語化とハーネス化',
+    body: '「なんとなく良い」を、AIが守れるルールと、機械で検査できる仕組みに変えます。これにより、人が細部を確認しなくても品質が揃う範囲を広げます。',
+  },
+  {
+    title: 'AIでは提案できない新規施策の提案',
+    body: '過去の正解の延長にない施策や、定石から外れていても事業とユーザーに効く打ち手を、当事者の文脈から提案します。',
+  },
 ];
 
 const files = [
@@ -21,74 +35,87 @@ const files = [
 ];
 ---
 
-<Base title="Process" description="デザインハーネスでAIの自動開発を制御し、事業の成長につなげる。中大路一のデザインプロセス。">
+<Base
+  title="Process"
+  description="デザインハーネスでAIの自動開発を制御し、事業の成長につなげる。中大路一のデザインプロセス。"
+>
   <div class="mx-auto max-w-4xl px-6 pt-8 md:pt-16">
     <ProvisionalNote />
     <div class="mt-12 md:mt-24">
       <PageHeader lead="AIが開発を担うようになると、デザイナーの仕事は画面を作ることから、AIが正しく作れる条件を整えること、そしてAIが思いつかない打ち手を出すことへ移っていくと考えています。">
-        <span class="inline-block">人を揃える</span><span class="inline-block">デザインから、</span><span class="inline-block">AIを制御する</span><span class="inline-block">デザインへ</span>
+        <span class="inline-block">人を揃える</span>
+        <span class="inline-block">デザインから、</span>
+        <span class="inline-block">AIを制御する</span>
+        <span class="inline-block">デザインへ</span>
       </PageHeader>
     </div>
 
     <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">制御する対象が変わる</h2>
+      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
+        制御する対象が変わる
+      </h2>
       <div class="mt-8 grid gap-4 md:mt-12 md:grid-cols-2">
-        {
-          shift.map((item, i) => (
-            <div
-              data-reveal
-              class:list={['p-8 md:p-10', i === 1 ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-950']}
-            >
-              <p class:list={['text-sm', i === 1 ? 'text-gray-300' : 'text-gray-700']}>{item.label}</p>
-              <h3 class="mt-4 text-xl leading-snug font-bold md:text-2xl md:leading-snug">{item.title}</h3>
-              <p class:list={['mt-4 leading-loose', i === 1 ? 'text-gray-200' : 'text-gray-700']}>{item.body}</p>
-            </div>
-          ))
-        }
+        {shift.map((item, i) => (
+          <div
+            data-reveal
+            class:list={['p-8 md:p-10', i === 1 ? 'bg-gray-950 text-white' : 'bg-gray-100 text-gray-950']}
+          >
+            <p class:list={['text-sm', i === 1 ? 'text-gray-300' : 'text-gray-700']}>{item.label}</p>
+            <h3 class="mt-4 text-xl leading-snug font-bold md:text-2xl md:leading-snug">{item.title}</h3>
+            <p class:list={['mt-4 leading-loose', i === 1 ? 'text-gray-200' : 'text-gray-700']}>{item.body}</p>
+          </div>
+        ))}
       </div>
     </section>
 
     <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">デザイナーの仕事は2つになる</h2>
+      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
+        デザイナーの仕事は2つになる
+      </h2>
       <ol class="mt-8 divide-y divide-gray-200 border-y border-gray-200 md:mt-12">
-        {
-          roles.map((item, index) => (
-            <li data-reveal class="grid gap-4 py-8 md:grid-cols-4 md:gap-8 md:py-12">
-              <p class="text-5xl font-bold text-gray-950 md:text-6xl">{index + 1}</p>
-              <div class="md:col-span-3">
-                <h3 class="text-xl leading-snug font-bold text-gray-950 md:text-2xl md:leading-snug">{item.title}</h3>
-                <p class="mt-4 leading-loose text-gray-700">{item.body}</p>
-              </div>
-            </li>
-          ))
-        }
+        {roles.map((item, index) => (
+          <li data-reveal class="grid gap-4 py-8 md:grid-cols-4 md:gap-8 md:py-12">
+            <p class="text-5xl font-bold text-gray-950 md:text-6xl">{index + 1}</p>
+            <div class="md:col-span-3">
+              <h3 class="text-xl leading-snug font-bold text-gray-950 md:text-2xl md:leading-snug">{item.title}</h3>
+              <p class="mt-4 leading-loose text-gray-700">{item.body}</p>
+            </div>
+          </li>
+        ))}
       </ol>
     </section>
 
     <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">事業の成長につなげる</h2>
+      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
+        事業の成長につなげる
+      </h2>
       <div data-reveal class="mt-8 space-y-4 leading-loose text-gray-700 md:mt-12 md:text-lg md:leading-loose">
-        <p>ハーネスで開発の速度と品質を揃え、そこで生まれた時間を新規施策の検討と検証に使う。この循環で、デザインを事業の成長につなげていきます。</p>
+        <p>
+          ハーネスで開発の速度と品質を揃え、そこで生まれた時間を新規施策の検討と検証に使う。この循環で、デザインを事業の成長につなげていきます。
+        </p>
         <p>〔仮〕実例と成果をここに記入。</p>
       </div>
     </section>
 
     <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">ハーネスの実物</h2>
+      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
+        ハーネスの実物
+      </h2>
       <p data-reveal class="mt-8 leading-loose text-gray-700 md:mt-12 md:text-lg md:leading-loose">
         このサイトの制作で実際に使っているファイルを公開しています。
       </p>
       <ul class="mt-8 grid gap-4 md:grid-cols-3">
-        {
-          files.map((file) => (
-            <li data-reveal>
-              <a href={`${SITE.repoFile}${file.name}`} class="block h-full bg-gray-100 p-8 transition-colors hover:bg-gray-200">
-                <span class="font-bold break-all text-gray-950 underline">{file.name}</span>
-                <span class="mt-4 block text-sm leading-relaxed text-gray-700">{file.body}</span>
-              </a>
-            </li>
-          ))
-        }
+        {files.map((file) => (
+          <li data-reveal>
+            <a
+              href={`${SITE.repoFile}${file.name}`}
+              class="block h-full bg-gray-100 p-8 transition-colors hover:bg-gray-200"
+            >
+              <span class="font-bold break-all text-gray-950 underline">{file.name}</span>
+              <span class="mt-4 block text-sm leading-relaxed text-gray-700">{file.body}</span>
+            </a>
+          </li>
+        ))}
       </ul>
     </section>
   </div>

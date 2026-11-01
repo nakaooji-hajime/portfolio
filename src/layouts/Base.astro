@@ -35,7 +35,9 @@ const pageTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | UI/UXデ�
     <slot name="head" />
   </head>
   <body class="flex min-h-svh flex-col bg-white font-sans text-gray-900 antialiased">
-    <a href="#main" class="sr-only focus:not-sr-only">本文へ移動</a>
+    <a href="#main" class="sr-only focus:not-sr-only">
+      本文へ移動
+    </a>
     <Header overlay={overlayHeader} />
     <main id="main" class="flex-1">
       <slot />

@@ -1,0 +1,4 @@
+dist/
+.astro/
+prototypes/
+package-lock.json

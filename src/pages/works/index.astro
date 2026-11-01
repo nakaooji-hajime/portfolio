@@ -14,28 +14,28 @@ const others = works.filter((work) => !work.data.featured);
     <PageHeader lead="これまでに携わったプロダクトと、そこで生んだ成果をまとめています。">Works</PageHeader>
 
     <section class="mt-16 md:mt-24">
-      <h2 data-reveal class="font-bold text-gray-950">主要な事例</h2>
+      <h2 data-reveal class="font-bold text-gray-950">
+        主要な事例
+      </h2>
       <div class="mt-8 grid gap-16 md:grid-cols-2 md:gap-x-8">
-        {
-          featured.map((work) => (
-            <div data-reveal>
-              <WorkCard work={work} />
-            </div>
-          ))
-        }
+        {featured.map((work) => (
+          <div data-reveal>
+            <WorkCard work={work} />
+          </div>
+        ))}
       </div>
     </section>
 
     <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="font-bold text-gray-950">その他の事例</h2>
+      <h2 data-reveal class="font-bold text-gray-950">
+        その他の事例
+      </h2>
       <div class="mt-8 grid gap-16 md:grid-cols-2 md:gap-x-8 lg:grid-cols-3">
-        {
-          others.map((work) => (
-            <div data-reveal>
-              <WorkCard work={work} />
-            </div>
-          ))
-        }
+        {others.map((work) => (
+          <div data-reveal>
+            <WorkCard work={work} />
+          </div>
+        ))}
       </div>
     </section>
   </div>

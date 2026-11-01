@@ -9,4 +9,8 @@ const { lead } = Astro.props;
 <h1 data-reveal class="text-4xl leading-tight font-bold text-gray-950 md:text-6xl md:leading-tight">
   <slot />
 </h1>
-{lead && <p data-reveal class="mt-8 max-w-2xl leading-loose text-gray-700 md:text-lg md:leading-loose">{lead}</p>}
+{lead && (
+  <p data-reveal class="mt-8 max-w-2xl leading-loose text-gray-700 md:text-lg md:leading-loose">
+    {lead}
+  </p>
+)}

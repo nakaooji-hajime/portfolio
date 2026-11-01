@@ -15,9 +15,24 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
 // 実績の見せ方。先頭の実績を最も大きく見せる
 const tileStyles = [
   { span: 'lg:col-span-4', tone: 'bg-gray-950 text-white', labelTone: 'text-gray-300', size: 'text-7xl md:text-9xl' },
-  { span: 'lg:col-span-2', tone: 'bg-gray-100 text-gray-950', labelTone: 'text-gray-700', size: 'text-7xl md:text-8xl' },
-  { span: 'lg:col-span-3', tone: 'bg-gray-100 text-gray-950', labelTone: 'text-gray-700', size: 'text-7xl md:text-8xl' },
-  { span: 'lg:col-span-3', tone: 'bg-gray-100 text-gray-950', labelTone: 'text-gray-700', size: 'text-7xl md:text-8xl' },
+  {
+    span: 'lg:col-span-2',
+    tone: 'bg-gray-100 text-gray-950',
+    labelTone: 'text-gray-700',
+    size: 'text-7xl md:text-8xl',
+  },
+  {
+    span: 'lg:col-span-3',
+    tone: 'bg-gray-100 text-gray-950',
+    labelTone: 'text-gray-700',
+    size: 'text-7xl md:text-8xl',
+  },
+  {
+    span: 'lg:col-span-3',
+    tone: 'bg-gray-100 text-gray-950',
+    labelTone: 'text-gray-700',
+    size: 'text-7xl md:text-8xl',
+  },
 ];
 const tiles = highlights.flatMap((item, i) => {
   const style = tileStyles[i];
@@ -45,7 +60,8 @@ const firstYear = Math.floor(first);
 
   <section class="mx-auto max-w-6xl px-6 py-24 md:py-40">
     <h2 data-reveal class="text-3xl leading-snug font-bold text-gray-950 md:text-5xl md:leading-snug">
-      <span class="inline-block">前提を疑い、</span><span class="inline-block">新たな視点も大事にする</span>
+      <span class="inline-block">前提を疑い、</span>
+      <span class="inline-block">新たな視点も大事にする</span>
     </h2>
     <p data-reveal class="mt-10 max-w-2xl leading-loose text-gray-950 md:mt-16 md:text-lg md:leading-loose">
       デザイナー人生を振り返ると、大きな成果を作れた時は、いつも新たな挑戦に挑んだ時でした。その業界・組織では考えつかなかった、AIのロジカルな改善提案には出てこなかった。「そんなことやっていいんだっけ？」「やったことないから分からない」。そんな声の中、たくさん失敗もしましたが、大きな成功も生むことができました。「前提を疑い、新たな視点も大事にする」そんな考えを大事にデザインに取り組んでいます。
@@ -54,7 +70,9 @@ const firstYear = Math.floor(first);
 
   <section id="about" class="scroll-mt-8 border-t border-gray-200">
     <div class="mx-auto max-w-6xl px-6 py-24 md:py-40">
-      <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">About</h2>
+      <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">
+        About
+      </h2>
       <div class="mt-12 grid gap-12 md:mt-20 md:grid-cols-3 md:gap-16">
         <div data-reveal>
           <Image src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs" />
@@ -71,7 +89,9 @@ const firstYear = Math.floor(first);
           <div data-reveal class="mt-12 md:mt-16">
             <h3 class="font-bold text-gray-950">スキル・強み</h3>
             <ul class="mt-4 divide-y divide-gray-200 border-y border-gray-200 text-gray-700">
-              {strengths.map((item) => <li class="py-4">{item}</li>)}
+              {strengths.map((item) => (
+                <li class="py-4">{item}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -81,70 +101,70 @@ const firstYear = Math.floor(first);
 
   <section class="bg-gray-50">
     <div class="mx-auto max-w-6xl px-6 py-24 md:py-40">
-      <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">Career</h2>
+      <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">
+        Career
+      </h2>
       <dl class="mt-12 grid gap-4 md:mt-20 md:grid-cols-2 lg:grid-cols-6">
-        {
-          tiles.map((item, i) => (
-            <div
-              data-reveal
-              class:list={[
-                'flex min-h-64 flex-col-reverse justify-between gap-8 p-8 md:p-10',
-                item.span,
-                item.tone,
-                i === 0 && 'md:col-span-2',
-              ]}
-            >
-              <dt class:list={['text-sm leading-relaxed', item.labelTone]}>{item.label}</dt>
-              <dd class="font-bold">
-                <span data-count={item.value.replaceAll(',', '')} class:list={['tracking-tight tabular-nums', item.size]}>
-                  {item.value}
-                </span>
-                <span class="ml-1 text-lg md:text-2xl">{item.unit}</span>
-              </dd>
-            </div>
-          ))
-        }
+        {tiles.map((item, i) => (
+          <div
+            data-reveal
+            class:list={[
+              'flex min-h-64 flex-col-reverse justify-between gap-8 p-8 md:p-10',
+              item.span,
+              item.tone,
+              i === 0 && 'md:col-span-2',
+            ]}
+          >
+            <dt class:list={['text-sm leading-relaxed', item.labelTone]}>{item.label}</dt>
+            <dd class="font-bold">
+              <span data-count={item.value.replaceAll(',', '')} class:list={['tracking-tight tabular-nums', item.size]}>
+                {item.value}
+              </span>
+              <span class="ml-1 text-lg md:text-2xl">{item.unit}</span>
+            </dd>
+          </div>
+        ))}
       </dl>
 
       <div class="mt-24 md:mt-32">
-        <h3 data-reveal class="font-bold text-gray-950">経歴</h3>
+        <h3 data-reveal class="font-bold text-gray-950">
+          経歴
+        </h3>
         <ol class="mt-6 divide-y divide-gray-200 border-y border-gray-200">
-          {
-            career.map((item) => (
-              <li data-reveal class="grid gap-2 py-8 md:grid-cols-4 md:gap-8">
-                <p class="text-sm leading-relaxed text-gray-600">{item.period}</p>
-                <div class="md:col-span-3">
-                  <h4 class="font-bold text-gray-950">{item.company}</h4>
-                  <p class="mt-2 leading-loose text-gray-700">{item.detail}</p>
-                  <div class="relative mt-6 h-1 bg-gray-200" aria-hidden="true">
-                    <span
-                      class="career-bar absolute inset-y-0 bg-gray-950"
-                      style={`left:${percent(item.start)}%;width:${percent(item.end ?? now) - percent(item.start)}%`}
-                    />
-                  </div>
-                  <div class="mt-2 flex justify-between text-xs text-gray-600" aria-hidden="true">
-                    <span>{firstYear}</span>
-                    <span>現在</span>
-                  </div>
+          {career.map((item) => (
+            <li data-reveal class="grid gap-2 py-8 md:grid-cols-4 md:gap-8">
+              <p class="text-sm leading-relaxed text-gray-600">{item.period}</p>
+              <div class="md:col-span-3">
+                <h4 class="font-bold text-gray-950">{item.company}</h4>
+                <p class="mt-2 leading-loose text-gray-700">{item.detail}</p>
+                <div class="relative mt-6 h-1 bg-gray-200" aria-hidden="true">
+                  <span
+                    class="career-bar absolute inset-y-0 bg-gray-950"
+                    style={`left:${percent(item.start)}%;width:${percent(item.end ?? now) - percent(item.start)}%`}
+                  />
                 </div>
-              </li>
-            ))
-          }
+                <div class="mt-2 flex justify-between text-xs text-gray-600" aria-hidden="true">
+                  <span>{firstYear}</span>
+                  <span>現在</span>
+                </div>
+              </div>
+            </li>
+          ))}
         </ol>
       </div>
     </div>
   </section>
 
   <section class="mx-auto max-w-6xl px-6 pt-24 md:pt-40">
-    <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">Works</h2>
+    <h2 data-reveal class="text-4xl font-bold text-gray-950 md:text-6xl">
+      Works
+    </h2>
     <div class="mt-12 grid gap-16 md:mt-20 md:grid-cols-2 md:gap-x-8">
-      {
-        featured.map((work) => (
-          <div data-reveal>
-            <WorkCard work={work} />
-          </div>
-        ))
-      }
+      {featured.map((work) => (
+        <div data-reveal>
+          <WorkCard work={work} />
+        </div>
+      ))}
     </div>
     <p data-reveal class="mt-16 md:mt-24">
       <a

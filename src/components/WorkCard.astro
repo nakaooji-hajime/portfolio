@@ -23,7 +23,11 @@ const { title, subtitle, role, summary, thumbnail } = work.data;
   <p class="mt-1 text-sm text-gray-600">{subtitle}</p>
   <p class="mt-3 text-sm text-gray-600">{role}</p>
   <p class="mt-3 font-bold text-gray-800">{summary}</p>
-  <a href={url(`works/${work.id}`)} class="mt-4 text-sm text-gray-950 underline after:absolute after:inset-0" aria-label={`${title}の詳細を見る`}>
+  <a
+    href={url(`works/${work.id}`)}
+    class="mt-4 text-sm text-gray-950 underline after:absolute after:inset-0"
+    aria-label={`${title}の詳細を見る`}
+  >
     詳細を見る
   </a>
 </article>

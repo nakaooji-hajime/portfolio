@@ -6,8 +6,16 @@ import { SITE, url } from '../site';
   <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-10 text-sm text-gray-600">
     <p>© {SITE.name}</p>
     <ul class="flex gap-6">
-      <li><a href={url('resume')} class="hover:text-gray-950 hover:underline">Resume</a></li>
-      <li><a href={SITE.github} class="hover:text-gray-950 hover:underline">GitHub</a></li>
+      <li>
+        <a href={url('resume')} class="hover:text-gray-950 hover:underline">
+          Resume
+        </a>
+      </li>
+      <li>
+        <a href={SITE.github} class="hover:text-gray-950 hover:underline">
+          GitHub
+        </a>
+      </li>
     </ul>
   </div>
 </footer>
