@@ -37,7 +37,7 @@
 /* 演出 */
 :root {
   --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --hero-start: 1.9s;
+  --hero-start: 3.5s;
 }
 
 .intro-seen {
@@ -45,7 +45,7 @@
 }
 
 .intro {
-  animation: intro-out 0.5s 1.4s both;
+  animation: intro-out 0.5s 3s both;
 }
 
 .intro-seen .intro {
@@ -53,7 +53,32 @@
 }
 
 .intro-logo {
-  animation: intro-logo 1.4s ease both;
+  animation: intro-logo 3s ease both;
+}
+
+/* ヘッダーのロゴとナビ。左半分が黒、右半分が元の色の背景を文字で切り抜き、ホバーで右へずらして黒を入れる */
+.header-fill {
+  --fill-base: var(--color-gray-500);
+  background-image: linear-gradient(to right, var(--color-gray-950) 50%, var(--fill-base) 50%);
+  background-position: 100% 0;
+  background-size: 200% 100%;
+  background-clip: text;
+  color: transparent;
+  transition: background-position 0.4s var(--ease-soft);
+}
+
+.header-fill-overlay {
+  --fill-base: var(--color-white);
+}
+
+.header-fill:focus-visible {
+  background-position: 0 0;
+}
+
+@media (hover: hover) {
+  .header-fill:hover {
+    background-position: 0 0;
+  }
 }
 
 .hero-bg {
@@ -148,6 +173,10 @@
   .hero-sub,
   .hero-line > span {
     animation: none;
+  }
+
+  .header-fill {
+    transition: none;
   }
 
   .js [data-reveal],

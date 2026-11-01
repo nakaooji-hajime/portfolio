@@ -8,31 +8,28 @@ interface Props {
 const { overlay = false } = Astro.props;
 
 const nav = [
-  { label: 'About', href: url('#about') },
+  { label: 'Profile', href: url('#profile') },
   { label: 'Works', href: url('works') },
-  { label: 'Process', href: url('process') },
+  { label: 'Vision', href: url('vision') },
   { label: 'Resume', href: url('resume') },
 ];
 const current = Astro.url.pathname;
 const isCurrent = (href: string) => current.startsWith(href);
+const fill = ['header-fill inline-block', overlay && 'header-fill-overlay'];
 ---
 
 <header class:list={overlay ? 'hero-fade absolute inset-x-0 top-0 z-10 text-white' : 'border-b border-gray-200'}>
-  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-6">
-    <a href={url()} class:list={['font-bold tracking-wide', !overlay && 'text-gray-950']}>
+  <div class="mx-auto flex flex-wrap items-center justify-between gap-4 px-6 py-6">
+    <a href={url()} class:list={[fill, 'font-bold tracking-wide']}>
       {SITE.name}
     </a>
     <nav aria-label="メイン">
-      <ul class:list={['flex gap-6 text-sm', !overlay && 'text-gray-700']}>
+      <ul class="flex gap-6 text-sm">
         {nav.map((item) => (
           <li>
             <a
               href={item.href}
-              class:list={[
-                'hover:underline',
-                !overlay && 'hover:text-gray-950',
-                isCurrent(item.href) && 'font-bold text-gray-950',
-              ]}
+              class:list={isCurrent(item.href) ? 'font-bold text-gray-950' : fill}
               aria-current={isCurrent(item.href) ? 'page' : undefined}
             >
               {item.label}

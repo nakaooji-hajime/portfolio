@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ProvisionalNote from '../components/ProvisionalNote.astro';
+import { SITE } from '../site';
+
+const forecasts = [
+  {
+    title: '画面はAIが作るようになる',
+    body: '仕様とルールがあれば、画面の制作や実装の多くをAIが担うようになると考えています。',
+  },
+  {
+    title: '品質はルールで決まるようになる',
+    body: 'デザインシステムが人の判断を揃えてきたように、これからはAIの判断を揃える仕組みが品質を左右します。',
+  },
+  {
+    title: '正解の延長では差がつかなくなる',
+    body: '過去のデータから導ける改善は、どの会社でも同じように出せるようになります。差がつくのは、その延長にない打ち手です。',
+  },
+];
+
+const actions = [
+  {
+    title: 'デザインの判断を、AIが守れるルールにする',
+    body: '「なんとなく良い」を言語化し、AIが守れるルールと機械で検査できる仕組みに変えていきます。人が細部を確認しなくても品質が揃う範囲を広げるためです。',
+  },
+  {
+    title: 'AIからは出てこない打ち手を提案する',
+    body: '前提を疑い、定石から外れていても事業とユーザーに効く施策を、当事者の文脈から提案していきます。',
+  },
+];
+
+const files = [
+  { name: 'design.md', body: '色、タイポグラフィ、余白、コンポーネントのルール' },
+  { name: 'contents.md', body: '読者、文体、数値の書き方、ページ構成のルール' },
+  { name: 'scripts/harness.mjs', body: 'ルール違反を機械的に検出するスクリプト' },
+];
+---
+
+<Base title="Vision" description="AIが開発を担う時代に、デザイナーとして何をしていくか。中大路一の考えと取り組み。">
+  <div class="mx-auto max-w-4xl px-6 pt-8 md:pt-16">
+    <ProvisionalNote />
+    <div class="mt-12 md:mt-24">
+      <PageHeader lead="AIが開発を担うようになっても、事業を伸ばすデザイナーであり続けたいと考えています。これから起こると考えている変化と、その中で自分が取り組んでいくことをまとめました。">
+        <span class="inline-block">AIが作る時代も、</span>
+        <span class="inline-block">デザインで</span>
+        <span class="inline-block">事業を伸ばす</span>
+      </PageHeader>
+    </div>
+
+    <section class="mt-24 md:mt-40">
+      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
+        これから起こると考えていること
+      </h2>
+      <ul class="mt-8 grid gap-4 md:mt-12 md:grid-cols-3">
+        {forecasts.map((item) => (
+          <li data-reveal class="bg-gray-100 p-8">
+            <h3 class="text-xl leading-snug font-bold text-gray-950">{item.title}</h3>
+            <p class="mt-4 leading-loose text-gray-700">{item.body}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-24 md:mt-40">
+      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
+        だから、デザイナーとしてこうしていく
+      </h2>
+      <ol class="mt-8 divide-y divide-gray-200 border-y border-gray-200 md:mt-12">
+        {actions.map((item, index) => (
+          <li data-reveal class="grid gap-4 py-8 md:grid-cols-4 md:gap-8 md:py-12">
+            <p class="text-5xl font-bold text-gray-950 md:text-6xl">{index + 1}</p>
+            <div class="md:col-span-3">
+              <h3 class="text-xl leading-snug font-bold text-gray-950 md:text-2xl md:leading-snug">{item.title}</h3>
+              <p class="mt-4 leading-loose text-gray-700">{item.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p data-reveal class="mt-8 leading-loose text-gray-700 md:mt-12 md:text-lg md:leading-loose">
+        ルールで開発の速度と品質を揃え、そこで生まれた時間を新しい施策の検討と検証に使う。この循環で、デザインを事業の成長につなげていきます。
+      </p>
+    </section>
+
+    <section class="mt-24 md:mt-40">
+      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
+        すでに始めていること
+      </h2>
+      <p data-reveal class="mt-8 leading-loose text-gray-700 md:mt-12 md:text-lg md:leading-loose">
+        このサイトも、AIが守るルールと検査の仕組みを用意して制作しています。実際に使っているファイルを公開しています。
+      </p>
+      <ul class="mt-8 grid gap-4 md:grid-cols-3">
+        {files.map((file) => (
+          <li data-reveal>
+            <a
+              href={`${SITE.repoFile}${file.name}`}
+              class="block h-full bg-gray-100 p-8 transition-colors hover:bg-gray-200"
+            >
+              <span class="font-bold break-all text-gray-950 underline">{file.name}</span>
+              <span class="mt-4 block text-sm leading-relaxed text-gray-700">{file.body}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>
