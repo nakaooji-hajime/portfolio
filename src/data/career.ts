@@ -31,9 +31,27 @@ export const career = [
   },
 ];
 
-export const skills = [
-  { category: 'デザイン', items: ['Figma'] },
-  { category: 'フロントエンド', items: ['React', 'TypeScript', 'Tailwind'] },
-  { category: 'リサーチ', items: ['行動観察', 'インタビュー', 'アンケート', 'データ分析'] },
-  { category: 'その他', items: ['職能マネジメント経験あり'] },
+export type SkillIconName =
+  'figma' | 'react' | 'typescript' | 'tailwind' | 'observation' | 'interview' | 'survey' | 'analytics' | 'management';
+
+export const skills: { category: string; items: { label: string; icon: SkillIconName }[] }[] = [
+  { category: 'デザイン', items: [{ label: 'Figma', icon: 'figma' }] },
+  {
+    category: 'フロントエンド',
+    items: [
+      { label: 'React', icon: 'react' },
+      { label: 'TypeScript', icon: 'typescript' },
+      { label: 'Tailwind', icon: 'tailwind' },
+    ],
+  },
+  {
+    category: 'リサーチ',
+    items: [
+      { label: '行動観察', icon: 'observation' },
+      { label: 'インタビュー', icon: 'interview' },
+      { label: 'アンケート', icon: 'survey' },
+      { label: 'データ分析', icon: 'analytics' },
+    ],
+  },
+  { category: 'その他', items: [{ label: '職能マネジメント経験あり', icon: 'management' }] },
 ];

@@ -1,0 +1,31 @@
+---
+import ChartColumn from '@lucide/astro/icons/chart-column';
+import ClipboardList from '@lucide/astro/icons/clipboard-list';
+import Eye from '@lucide/astro/icons/eye';
+import Mic from '@lucide/astro/icons/mic';
+import Users from '@lucide/astro/icons/users';
+import { siFigma, siReact, siTailwindcss, siTypescript } from 'simple-icons';
+import type { SkillIconName } from '../data/career';
+
+interface Props {
+  name: SkillIconName;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+
+// サービスはロゴ、それ以外は連想するアイコンを使う。色はgrayに揃える
+const logos = { figma: siFigma, react: siReact, typescript: siTypescript, tailwind: siTailwindcss };
+const symbols = { observation: Eye, interview: Mic, survey: ClipboardList, analytics: ChartColumn, management: Users };
+
+const logo = name in logos ? logos[name as keyof typeof logos] : undefined;
+const Icon = name in symbols ? symbols[name as keyof typeof symbols] : undefined;
+---
+
+{logo ? (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class={className}>
+    <path d={logo.path} />
+  </svg>
+) : (
+  Icon && <Icon aria-hidden="true" class={className} />
+)}
