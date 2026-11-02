@@ -1,9 +1,10 @@
 @import 'tailwindcss';
 
-/* gray以外のクラスを生成させない */
+/* grayとアクセントのteal-400以外のクラスを生成させない */
 @theme {
   --color-*: initial;
   --color-white: #fff;
+  --color-teal-400: oklch(77.7% 0.152 181.912);
   --color-gray-50: oklch(98.5% 0.002 247.839);
   --color-gray-100: oklch(96.7% 0.003 264.542);
   --color-gray-200: oklch(92.8% 0.006 264.531);
@@ -44,11 +45,10 @@
   animation: intro-logo 3s ease both;
 }
 
-/* サイト内のリンクと、カードやボタンの文字。左半分が染まった後の色、右半分が元の色の背景を文字で切り抜き、ホバーで右へずらす */
+/* サイト内のリンクとカードの見出しの文字。左半分がアクセント色、右半分が元の色の背景を文字で切り抜き、ホバーで右へずらす */
 .text-fill {
-  --fill-base: var(--color-gray-500);
-  --fill-on: var(--color-gray-950);
-  background-image: linear-gradient(to right, var(--fill-on) 50%, var(--fill-base) 50%);
+  --fill-base: var(--color-gray-950);
+  background-image: linear-gradient(to right, var(--color-teal-400) 50%, var(--fill-base) 50%);
   background-position: 100% 0;
   background-size: 200% 100%;
   background-clip: text;
@@ -56,53 +56,40 @@
   transition: background-position 0.4s var(--ease-soft);
 }
 
-/* 本文に近い濃さの文字 */
-.text-fill-muted {
-  --fill-base: var(--color-gray-600);
-}
-
-/* 黒いボタンの上の文字。白に向けて染める */
-.text-fill-button {
-  --fill-base: var(--color-gray-300);
-  --fill-on: var(--color-white);
-}
-
-/* 暗い背景の上では白のまま。カーソルの下に白い光が来るときだけ黒に染める */
+/* 暗い背景の上の文字 */
 .text-fill-overlay {
   --fill-base: var(--color-white);
-  --fill-on: var(--color-white);
+}
+
+/* ボタンとパネルの背景。文字はそのままで、背景だけを左からアクセント色に染める */
+.bg-fill {
+  --fill-base: var(--color-gray-950);
+  background-image: linear-gradient(to right, var(--color-teal-400) 50%, var(--fill-base) 50%);
+  background-position: 100% 0;
+  background-size: 200% 100%;
+  transition: background-position 0.7s var(--ease-soft);
+}
+
+.bg-fill-light {
+  --fill-base: var(--color-white);
 }
 
 .text-fill:focus-visible,
-.group:focus-visible .text-fill {
+.group:focus-visible .text-fill,
+.bg-fill:focus-visible {
   background-position: 0 0;
 }
 
 @media (hover: hover) {
   .text-fill:hover,
-  .group:hover .text-fill {
+  .group:hover .text-fill,
+  .bg-fill:hover {
     background-position: 0 0;
   }
 
-  /* カードやボタンは文字数が多いぶん、ゆっくり染める */
+  /* カードは文字数が多いぶん、ゆっくり染める */
   .group .text-fill {
     transition-duration: 0.7s;
-  }
-
-  .text-fill-overlay:hover {
-    text-decoration: underline var(--color-white);
-  }
-
-  .has-light .text-fill-overlay:hover {
-    --fill-on: var(--color-gray-950);
-    text-decoration: none;
-  }
-}
-
-/* ホバーのない端末では黒に染まらないので、最初から黒で読ませる */
-@media (hover: none) {
-  .text-fill-touch {
-    --fill-base: var(--color-gray-950);
   }
 }
 
@@ -121,6 +108,11 @@
 .hero-line > span {
   display: block;
   animation: rise 1s var(--ease-soft) calc(var(--hero-start) + 0.2s + var(--i) * 0.16s) both;
+}
+
+/* 同じ並びを2つ繋げ、1つ分ずらしたところで先頭に戻して途切れなく流す */
+.marquee {
+  animation: marquee 80s linear infinite;
 }
 
 .js [data-reveal],
@@ -170,6 +162,12 @@
   }
 }
 
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -183,11 +181,13 @@
 
   .hero-fade,
   .hero-sub,
-  .hero-line > span {
+  .hero-line > span,
+  .marquee {
     animation: none;
   }
 
-  .text-fill {
+  .text-fill,
+  .bg-fill {
     transition: none;
   }
 

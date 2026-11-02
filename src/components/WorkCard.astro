@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import TagList from './TagList.astro';
-import { url } from '../site';
+import { url, workYear } from '../site';
 
 interface Props {
   work: CollectionEntry<'works'>;
@@ -13,25 +13,20 @@ const { title, subtitle, role, period, thumbnail } = work.data;
 ---
 
 <article class="h-full">
-  <a href={url(`works/${work.id}`)} class="group flex h-full flex-col bg-white">
-    <div class="overflow-hidden">
-      <Image
-        src={thumbnail}
-        alt={`${title}のサムネイル`}
-        class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105"
-      />
-    </div>
+  <a
+    href={url(`works/${work.id}`)}
+    class="group flex h-full flex-col bg-white transition-transform duration-500 hover:scale-102"
+  >
+    <Image src={thumbnail} alt={`${title}のサムネイル`} class="aspect-video w-full object-cover" />
     <div class="p-6 md:p-8">
       <h3 class="text-lg leading-relaxed font-bold">
-        <span class="text-fill text-fill-touch inline-block">
+        <span class="text-fill inline-block">
           {title} - {subtitle}
         </span>
       </h3>
-      <p class="mt-2 text-sm">
-        <span class="text-fill text-fill-muted inline-block">{period}</span>
-      </p>
+      <p class="mt-2 text-sm text-gray-600">制作時期：{workYear(period)}</p>
       <div class="mt-4">
-        <TagList items={role.split(' / ')} fill />
+        <TagList items={role.split(' / ')} />
       </div>
     </div>
   </a>

@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Button from './Button.astro';
+import inunavi from '../assets/works/inunavi-thumbnail.png';
+import erabel from '../assets/works/erabel-thumbnail.png';
+import datsumobijin from '../assets/works/datsumobijin-thumbnail.png';
+import edesupro from '../assets/works/edesupro-thumbnail.png';
+import { SITE, url } from '../site';
+
+const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order);
+
+const thumbnails = [
+  { src: inunavi, title: 'INUNAVI' },
+  { src: erabel, title: 'エラベル' },
+  { src: datsumobijin, title: '脱毛美人' },
+  { src: edesupro, title: 'イーデス プロ' },
+  ...works.map((work) => ({ src: work.data.thumbnail, title: work.data.title })),
+];
+---
+
+<section class="overflow-hidden bg-white py-24 md:py-40">
+  <div data-reveal class="mask-b-from-20% mask-b-to-80%">
+    <div class="marquee flex w-max">
+      {[false, true].map((copy) => (
+        <ul class="flex gap-2 pr-2" aria-hidden={copy ? 'true' : undefined}>
+          {thumbnails.map((thumbnail) => (
+            <li class="w-64 shrink-0 md:w-96">
+              <Image
+                src={thumbnail.src}
+                alt={copy ? '' : `${thumbnail.title}のサムネイル`}
+                class="aspect-video w-full rounded-2xl object-cover md:rounded-3xl"
+              />
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+  <div data-reveal class="relative -mt-8 px-6 text-center md:-mt-12">
+    <h2 class="text-xl leading-relaxed font-bold text-gray-950 md:text-3xl md:leading-relaxed">
+      職務履歴に具体的な成果、
+      <br />
+      その他の実績を記載しています
+    </h2>
+    <p class="mt-8">
+      <Button href={url(SITE.resumePdf)} download>
+        職務履歴をダウンロード →
+      </Button>
+    </p>
+  </div>
+</section>

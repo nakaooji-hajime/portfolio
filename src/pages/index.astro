@@ -79,9 +79,9 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
     <ol class="mt-12 divide-y divide-gray-200 border-y border-gray-200 md:mt-20">
       {career.map((item) => (
         <li data-reveal class="flex flex-col gap-2 py-8 md:flex-row md:gap-6">
-          <p class="text-sm leading-relaxed whitespace-nowrap text-gray-600 md:w-14 md:shrink-0">{item.period}</p>
+          <p class="text-2xl whitespace-nowrap text-gray-600 md:w-24 md:shrink-0">{item.period}</p>
           <div>
-            <h3 class="font-bold text-gray-950">{item.company}</h3>
+            <h3 class="text-2xl font-bold text-gray-950">{item.company}</h3>
             <p class="mt-2 leading-loose text-gray-700">{item.detail}</p>
           </div>
         </li>

@@ -6,11 +6,6 @@ type Props = HTMLAttributes<'a'>;
 const { class: className, ...attrs } = Astro.props;
 ---
 
-<a
-  {...attrs}
-  class:list={['group inline-block bg-gray-950 px-8 py-4 font-bold transition-colors hover:bg-gray-700', className]}
->
-  <span class="text-fill text-fill-button inline-block">
-    <slot />
-  </span>
+<a {...attrs} class:list={['bg-fill inline-block px-8 py-4 font-bold text-white', className]}>
+  <slot />
 </a>

@@ -5,7 +5,7 @@ import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import PanelLink from '../../components/PanelLink.astro';
-import { url } from '../../site';
+import { url, workYear } from '../../site';
 
 export async function getStaticPaths() {
   const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order);
@@ -45,7 +45,7 @@ const { Content } = await render(work);
       <ul data-reveal class="mt-8 space-y-1 text-sm leading-relaxed text-gray-600">
         <li>所属: {company}</li>
         <li>役割: {role}</li>
-        <li>期間: {period}</li>
+        <li>制作時期: {workYear(period)}</li>
       </ul>
       {screenshot && (
         <div data-reveal class="mt-12">
@@ -61,21 +61,21 @@ const { Content } = await render(work);
       <div class="grid gap-4 md:grid-cols-2">
         {prev ? (
           <PanelLink data-reveal href={url(`works/${prev.id}`)}>
-            <span class="text-fill text-fill-muted inline-block text-sm">← 前の事例</span>
-            <span class="text-fill text-fill-touch mt-2 block text-2xl font-bold">{prev.data.title}</span>
+            <span class="text-sm">← 前の事例</span>
+            <span class="mt-2 block text-2xl font-bold">{prev.data.title}</span>
           </PanelLink>
         ) : (
           <span class="hidden md:block" />
         )}
         {next && (
           <PanelLink data-reveal href={url(`works/${next.id}`)} class="text-right">
-            <span class="text-fill text-fill-muted inline-block text-sm">次の事例 →</span>
-            <span class="text-fill text-fill-touch mt-2 block text-2xl font-bold">{next.data.title}</span>
+            <span class="text-sm">次の事例 →</span>
+            <span class="mt-2 block text-2xl font-bold">{next.data.title}</span>
           </PanelLink>
         )}
       </div>
       <p class="mt-8 text-center">
-        <a href={url('works')} class="text-fill text-fill-touch inline-block underline decoration-gray-500">
+        <a href={url('works')} class="text-fill inline-block">
           Works一覧へ戻る
         </a>
       </p>

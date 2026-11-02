@@ -6,6 +6,6 @@ type Props = HTMLAttributes<'a'>;
 const { class: className, ...attrs } = Astro.props;
 ---
 
-<a {...attrs} class:list={['group bg-gray-100 p-8 transition-colors hover:bg-gray-200', className]}>
+<a {...attrs} class:list={['bg-fill bg-fill-light border border-gray-200 p-8 text-gray-950', className]}>
   <slot />
 </a>
