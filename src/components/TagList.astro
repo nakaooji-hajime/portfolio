@@ -1,13 +1,17 @@
 ---
 interface Props {
   items: string[];
+  // リンクの中で使うときに、ホバーで文字を染める
+  fill?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, fill = false } = Astro.props;
 ---
 
 <ul class="flex flex-wrap gap-2">
   {items.map((item) => (
-    <li class="bg-gray-100 px-3 py-1 text-sm text-gray-700">{item}</li>
+    <li class="bg-gray-100 px-3 py-1 text-sm text-gray-700">
+      {fill ? <span class="text-fill text-fill-muted inline-block">{item}</span> : item}
+    </li>
   ))}
 </ul>

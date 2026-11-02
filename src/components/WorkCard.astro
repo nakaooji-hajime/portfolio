@@ -12,23 +12,27 @@ const { work } = Astro.props;
 const { title, subtitle, role, period, thumbnail } = work.data;
 ---
 
-<article class="group relative h-full bg-white">
-  <div class="overflow-hidden">
-    <Image
-      src={thumbnail}
-      alt={`${title}のサムネイル`}
-      class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105"
-    />
-  </div>
-  <div class="p-6 md:p-8">
-    <h3 class="text-lg leading-relaxed font-bold">
-      <a href={url(`works/${work.id}`)} class="text-fill text-fill-touch inline-block after:absolute after:inset-0">
-        {title} - {subtitle}
-      </a>
-    </h3>
-    <p class="mt-2 text-sm text-gray-600">{period}</p>
-    <div class="mt-4">
-      <TagList items={role.split(' / ')} />
+<article class="h-full">
+  <a href={url(`works/${work.id}`)} class="group flex h-full flex-col bg-white">
+    <div class="overflow-hidden">
+      <Image
+        src={thumbnail}
+        alt={`${title}のサムネイル`}
+        class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
     </div>
-  </div>
+    <div class="p-6 md:p-8">
+      <h3 class="text-lg leading-relaxed font-bold">
+        <span class="text-fill text-fill-touch inline-block">
+          {title} - {subtitle}
+        </span>
+      </h3>
+      <p class="mt-2 text-sm">
+        <span class="text-fill text-fill-muted inline-block">{period}</span>
+      </p>
+      <div class="mt-4">
+        <TagList items={role.split(' / ')} fill />
+      </div>
+    </div>
+  </a>
 </article>

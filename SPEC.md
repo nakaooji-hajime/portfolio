@@ -14,7 +14,7 @@
   - 使用可能なカラーは **gray系のみ**（`gray-50`〜`gray-950`、`white`）
 - 画像: `src/assets/` に置き `astro:assets` で最適化する
 - コンテンツ: Astro Content Collections（MDX）で管理
-- 仮原稿は frontmatter に `provisional: true` を付け、画面に「仮原稿」と表示する。`npm run harness -- --release` は仮原稿が残っていると失敗し、公開をブロックする
+- 未確定の原稿には `〔仮〕` を付ける。`npm run harness -- --release` は `〔仮〕` が残っていると失敗する
 - 開発支援: Claude Code（個人Proプラン想定）
 
 ## 2. サイトマップ
@@ -22,6 +22,7 @@
 ```
 /                          ホーム（Profile + Career + Worksハイライト）
 /works                     Works一覧
+/works/portfolio           個別ケーススタディ: このポートフォリオ
 /works/goens               個別ケーススタディ: Goens
 /works/shehub              個別ケーススタディ: SheHub
 /works/creditengine        個別ケーススタディ: CreditEngine
@@ -32,7 +33,6 @@
 /works/edesupro            個別ケーススタディ: EdesuPro
 /works/inunavi             個別ケーススタディ: InuNavi
 /works/datsumobijin        個別ケーススタディ: DatsumoBijin
-/vision                    Vision
 /resume                    Resume（PDFダウンロード）
 ```
 
@@ -59,7 +59,7 @@
 **ワイヤーフレーム**
 
 ```
-[Header: ロゴ / ナビ（Profile, Works, Vision, Resume）]
+[Header: ロゴ / ナビ（Home, Profile, Works, Resume）]
 [Hero]
   キャッチコピー
   サブキャッチコピー
@@ -109,13 +109,10 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 ```
 [Header]
 [ファーストビュー: goens-thumbnail.png]
-[プロジェクト名 + 役割 + 期間]
-[概要]
-[課題]
-[プロセス（調査・設計・実装）]
-[記事中間: goens-screenshot.png]
-[成果（数値）]
-[学び・振り返り]
+[見出し: プロジェクト名 + 改行 + 説明]
+[メタ情報のリスト: 所属 / 役割 / 期間]
+[goens-screenshot.png]
+[本文（概要・課題・プロセス・成果・学びを見出しなしで1つにまとめる）]
 [Footer]
 ```
 
@@ -131,30 +128,7 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 
 （他のプロジェクトも同様のフォーマットで、職務経歴書の実績を基に「課題→プロセス→成果」を記述。デザインの見た目より成果と意思決定にフォーカス）
 
-### 4.4 Vision (`/vision`)
-
-**ワイヤーフレーム**
-
-```
-[Header]
-[タイトル: AIが作る時代も、デザインで事業を伸ばす]
-[セクション1: これから起こると考えていること]
-  - 画面はAIが作るようになる
-  - 品質はルールで決まるようになる
-  - 正解の延長では差がつかなくなる
-[セクション2: だから、デザイナーとしてこうしていく]
-  - デザインの判断を、AIが守れるルールにする
-  - AIからは出てこない打ち手を提案する
-[セクション3: すでに始めていること]
-  - このリポジトリのdesign.md、contents.md、scripts/harness.mjsへのリンク
-  - 後々Goensのものに差し替える
-[Footer]
-```
-
-**原稿方向性**
-AIが開発を担うようになるという見立てと、その中でデザイナーとして何をしていくかを書く。ルール化で生まれた時間を新規施策に使い、事業の成長につなげる。
-
-### 4.5 Resume (`/resume`)
+### 4.4 Resume (`/resume`)
 
 **ワイヤーフレーム**
 
@@ -171,7 +145,7 @@ PDFは職務経歴書を使用。連絡先はGitHubのみ公開する。
 ## 5. コンテンツ管理
 
 - `src/content/works/` に各プロジェクトのMDXを配置
-- スキーマ: `src/content.config.ts` を参照。本文の課題・プロセス・成果などはMDX本文に書く
+- スキーマ: `src/content.config.ts` を参照。概要・課題・プロセス・成果・学びはMDX本文に1つにまとめて書く
 - 画像は `src/assets/` に配置
 
 ## 6. 非機能要件

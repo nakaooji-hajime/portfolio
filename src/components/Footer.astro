@@ -12,6 +12,8 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
   (a, b) => a.data.order - b.data.order,
 );
 
+const link = 'text-fill text-fill-overlay inline-block';
+
 const groups = [
   { heading: 'Menu', links: NAV },
   { heading: 'Works', links: featured.map((work) => ({ label: work.data.title, href: url(`works/${work.id}`) })) },
@@ -25,7 +27,8 @@ const groups = [
 ];
 ---
 
-<footer class:list={['bg-gray-950 text-white', !flush && 'mt-24']}>
+<footer class:list={['hero-bg relative isolate overflow-hidden text-white', !flush && 'mt-24']}>
+  <canvas data-hero-light="solid" aria-hidden="true" class="absolute inset-0 -z-10 size-full"></canvas>
   <div class="mx-auto max-w-6xl px-6 pt-24 pb-10 md:pt-40">
     <div class="grid gap-16 lg:grid-cols-2">
       <div>
@@ -34,17 +37,17 @@ const groups = [
           <br />
           Hajime
         </p>
-        <p class="mt-6 leading-loose text-gray-300">新たな視点で成果に繋げるUI/UXデザイナー</p>
+        <p class="mt-6 text-sm tracking-wide md:text-2xl">{SITE.tagline}</p>
       </div>
       <div class="grid gap-12 sm:grid-cols-3">
         {groups.map((group) => (
           <nav aria-label={group.heading}>
             <h2 class="text-sm text-gray-400">{group.heading}</h2>
             <ul class="mt-4 space-y-3">
-              {group.links.map((link) => (
+              {group.links.map((item) => (
                 <li>
-                  <a href={link.href} class="hover:underline">
-                    {link.label}
+                  <a href={item.href} class={link}>
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -55,7 +58,7 @@ const groups = [
     </div>
     <div class="mt-24 flex flex-wrap items-center justify-between gap-4 text-sm text-gray-400 md:mt-40">
       <p>© {new Date().getFullYear()} Nakaooji Hajime</p>
-      <a href="#main" class="hover:text-white hover:underline">
+      <a href="#main" class={link}>
         ページ上部へ戻る
       </a>
     </div>

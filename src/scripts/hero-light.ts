@@ -1,5 +1,5 @@
-// ファーストビューとメッセージの背景に共通の光。マウスに遅れて追従するぼかしにノイズをかけて描く。
-// 2枚のキャンバスで同じ座標を使い、1つの光が境目をまたいで移動するように見せる。
+// ファーストビュー、メッセージ、フッターの背景に共通の光。マウスに遅れて追従するぼかしにノイズをかけて描く。
+// すべてのキャンバスで同じ座標を使い、1つの光がセクションをまたいで移動するように見せる。
 const VERTEX = `#version 300 es
 in vec2 p;
 out vec2 v;
@@ -15,7 +15,7 @@ out vec4 o;
 uniform vec2 uOrigin, uScale;
 uniform vec2 uM[3];
 uniform vec3 uDrops[3];
-uniform float uTime, uR;
+uniform float uTime, uR, uSplit;
 float hash(vec2 p) {
   vec3 q = fract(vec3(p.xyx) * 0.1031);
   q += dot(q, q.yzx + 33.33);
@@ -54,6 +54,11 @@ void main() {
   vec3 col = mix(vec3(c * 0.8, c * 0.99, c * 1.01), vec3(1.0), core) * uR;
   float grain = hash(gl_FragCoord.xy + fract(uTime) * 917.0) - 0.5;
   col += grain * 0.185 * (1.0 - core);
+  // 境界のないキャンバスは暗い面だけを描く
+  if (uSplit < 0.5) {
+    o = vec4(col, 1.0);
+    return;
+  }
   // 反転した側は周囲を白に近づけ、最も濃い中央を gray-300 までに抑える
   vec3 inverted = mix(vec3(0.85, 0.95, 0.95), vec3(1.0), 1.0 - clamp(col, 0.0, 1.0));
   // 境界（p.y = 1.0）は常に直線。光が跨いだときだけ、その地点の線を渦でちぎって上下を混ぜ、直線へ戻す
@@ -117,6 +122,8 @@ function createView(canvas: HTMLCanvasElement) {
   gl.enableVertexAttribArray(position);
   gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
+  gl.uniform1f(gl.getUniformLocation(program, 'uSplit'), canvas.dataset.heroLight === 'solid' ? 0 : 1);
+
   const view = {
     canvas,
     gl,
@@ -136,8 +143,9 @@ function createView(canvas: HTMLCanvasElement) {
 
 function start(hero: HTMLCanvasElement, canvases: HTMLCanvasElement[]) {
   const views = canvases.flatMap((canvas) => createView(canvas) ?? []);
+  if (views.length > 0) document.documentElement.classList.add('has-light');
 
-  // 座標の単位はファーストビューの高さ。原点はファーストビューの左上
+  // 座標の単位は先頭のキャンバス（ホームではファーストビュー）の高さ。原点はその左上
   let unit = 1;
   let heroTop = 0;
   const layout = () => {
@@ -161,6 +169,8 @@ function start(hero: HTMLCanvasElement, canvases: HTMLCanvasElement[]) {
     stale = true;
   });
   canvases.forEach((canvas) => observer.observe(canvas));
+  // 画像の読み込みなどでページの高さが変わると、フッターの座標がずれる
+  observer.observe(document.body);
 
   const target = { x: (0.68 * hero.clientWidth) / unit, y: 0.38 };
   // マウスは画面上の位置を覚え、スクロールしてもカーソルの下に光を置く。タッチは触れた場所に留める
@@ -185,8 +195,8 @@ function start(hero: HTMLCanvasElement, canvases: HTMLCanvasElement[]) {
   let nextDrop = 0;
   let lastDrop = -100;
   let leadBelow = lead.y >= 1;
-  const introSeen = document.documentElement.classList.contains('intro-seen');
-  let fadeStart = introSeen ? null : INTRO_MS;
+  const introPlays = document.querySelector('.intro') && !document.documentElement.classList.contains('intro-seen');
+  let fadeStart = introPlays ? INTRO_MS : null;
   let previous = performance.now();
 
   const frame = (now: number) => {

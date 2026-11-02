@@ -1,5 +1,5 @@
 // デザインハーネス: 任意値とgray以外の色を禁止する。
-// --release を付けると仮原稿が残っている場合も失敗する。
+// --release を付けると〔仮〕の原稿が残っている場合も失敗する。
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -26,8 +26,8 @@ for (const file of files) {
   for (const [name] of source.matchAll(offPalette)) {
     errors.push(`${file}: gray以外の色は禁止です: ${name}`);
   }
-  if (release && (/^provisional: true$/m.test(source) || /^\s*<ProvisionalNote/m.test(source))) {
-    errors.push(`${file}: 仮原稿が残っています`);
+  if (release && source.includes('〔仮〕')) {
+    errors.push(`${file}: 〔仮〕の原稿が残っています`);
   }
 }
 

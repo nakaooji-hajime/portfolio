@@ -8,7 +8,7 @@ interface Props {
 const { overlay = false } = Astro.props;
 
 const current = Astro.url.pathname;
-const isCurrent = (href: string) => current.startsWith(href);
+const isCurrent = (href: string) => (href === url() ? current === href : current.startsWith(href));
 const fill = ['text-fill inline-block', overlay && 'text-fill-overlay'];
 ---
 
@@ -23,7 +23,7 @@ const fill = ['text-fill inline-block', overlay && 'text-fill-overlay'];
           <li>
             <a
               href={item.href}
-              class:list={isCurrent(item.href) ? 'font-bold text-gray-950' : fill}
+              class:list={isCurrent(item.href) ? ['font-bold', overlay ? 'text-white' : 'text-gray-950'] : fill}
               aria-current={isCurrent(item.href) ? 'page' : undefined}
             >
               {item.label}
