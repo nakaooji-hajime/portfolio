@@ -73,7 +73,7 @@
   経歴（要約）
 [Works ハイライト]
   主要3〜4件のカード（サムネ + 見出し + 期間 + 担当タグ）
-  「すべてのWorksを見る」リンク
+  「すべての事例を見る」リンク
 [Footer]
 ```
 
@@ -119,7 +119,7 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 **原稿例（Goens）**
 
 - タイトル: Goens - 50代以上限定マッチングサービス
-- 役割: CXO / PM / UI/UX / 開発（React Native） / CS
+- 役割: CXO / PM / UI/UX / 開発（React Native） / カスタマーサポート
 - 概要: シニア世代の孤独解消と真剣な出会いを実現するマッチングアプリの立ち上げ・運営。
 - 課題: 50代以上のユーザーにとって使いやすく、安心感のある体験をゼロから設計する必要があった。
 - プロセス: ユーザーインタビューを基にシンプルなUIに集中。コミュニティ機能を組み込み、マッチング以外のつながりも提供。React Nativeで開発を進めつつ、デザインシステムを言語化してチームで共有。
@@ -134,7 +134,7 @@ Figma草案（https://www.figma.com/proto/QZSmGTrfdHG08oT3dIHNzi/Portfolio?node-
 
 ```
 [Header]
-[タイトル: 職務経歴書]
+[タイトル: Resume]
 [説明文]
 [PDFダウンロードボタン]
 [Footer]

@@ -3,7 +3,7 @@ import { SITE } from '../site';
 ---
 
 <div class="intro fixed inset-0 z-50 grid place-items-center bg-white" aria-hidden="true">
-  <span class="intro-logo text-2xl leading-snug font-bold text-gray-950">{SITE.name}</span>
+  <span class="intro-logo text-2xl leading-snug font-bold">{SITE.name}</span>
 </div>
 <section class="hero-bg relative flex h-svh min-h-96 flex-col justify-end overflow-hidden text-gray-50">
   <canvas data-hero-light aria-hidden="true" class="absolute inset-0 size-full touch-pan-y"></canvas>
@@ -24,6 +24,6 @@ import { SITE } from '../site';
         </span>
       </span>
     </h1>
-    <p class="hero-sub text-base leading-loose md:text-lg">{SITE.tagline}</p>
+    <p class="hero-sub text-base leading-loose md:text-2xl">{SITE.tagline}</p>
   </div>
 </section>

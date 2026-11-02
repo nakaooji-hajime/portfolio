@@ -15,14 +15,14 @@ const others = works.filter((work) => !work.data.featured);
       <PageHeader lead="これまでに携わったプロダクトと、そこで生んだ成果をまとめています。">Works</PageHeader>
 
       <section class="flex flex-col gap-8">
-        <h2 data-reveal class="text-2xl leading-snug font-bold text-gray-950">
+        <h2 data-reveal class="text-2xl leading-snug font-bold">
           主要な事例
         </h2>
         <WorkGrid works={featured} />
       </section>
 
       <section class="flex flex-col gap-8">
-        <h2 data-reveal class="text-2xl leading-snug font-bold text-gray-950">
+        <h2 data-reveal class="text-2xl leading-snug font-bold">
           その他の事例
         </h2>
         <WorkGrid works={others} dense />

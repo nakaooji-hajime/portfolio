@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  id?: string;
+  class?: string;
+}
+
+const { title, id, class: className } = Astro.props;
+---
+
+<section id={id} class:list={['w-full', className]}>
+  <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
+    <h2 data-reveal class="text-4xl leading-snug font-bold md:text-6xl">
+      {title}
+    </h2>
+    <slot />
+  </div>
+</section>

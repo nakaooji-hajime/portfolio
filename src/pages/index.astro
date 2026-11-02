@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
 import TagList from '../components/TagList.astro';
 import WorkGrid from '../components/WorkGrid.astro';
 import { career, skills } from '../data/career';
@@ -30,82 +31,67 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
   <section class="relative isolate w-full overflow-hidden bg-white">
     <canvas data-hero-light aria-hidden="true" class="absolute inset-0 -z-10 size-full"></canvas>
     <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
-      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
+      <h2 data-reveal class="text-4xl leading-snug font-bold md:text-6xl">
         前提を疑い、
         <br />
-        新たな視点を大切に。
+        新たな視点を持ち込む。
       </h2>
-      <div class="flex max-w-4xl flex-col gap-8 text-base leading-loose text-gray-950">
+      <div class="flex max-w-4xl flex-col gap-8 text-base leading-loose">
         <p data-reveal>
-          これまでのキャリアを振り返ると、大きな成果を生み出せたのは、いつも新しいことに挑戦したときでした。その業界や組織の中では思いつかず、AIのロジカルな改善提案からも出てこない。そんなアイデアに踏み出したときです。
+          キャリアを振り返ると、大きな成果につながったのは、いつも新しいことに挑戦したときでした。業界や組織の慣習からは思いつかず、データに基づくAIの改善提案からも出てこない。そんなアイデアに踏み出したときです。
         </p>
         <p data-reveal>
-          「そんなことをやっていいんだっけ？」「やったことがないから分からない」。そうした声が上がる中で、数多くの失敗もしましたが、大きな成功も生むことができました。
+          「そんなことをやっていいのか」「前例がないから判断できない」。そうした声が上がる中で踏み出し、多くの失敗も重ねましたが、大きな成果も生み出してきました。
         </p>
         <p data-reveal>
-          だからこそ、前提を疑い、新たな視点を持ち込むことを大切にしながら、デザインに取り組んでいます。
+          だからこそ、前提を疑い、新たな視点を事業の成果につなげることを大切に、デザインに取り組んでいます。
         </p>
       </div>
     </div>
   </section>
 
-  <section id="profile" class="w-full scroll-mt-8 bg-gray-50">
-    <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
-      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
-        Profile
-      </h2>
-      <div class="grid gap-12 md:grid-cols-3">
-        <Image data-reveal src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs rounded-lg" />
-        <div class="flex flex-col gap-12 md:col-span-2">
-          <p data-reveal class="text-base leading-loose text-gray-950">
-            広告代理店や事業会社で、WEB・アプリ・SaaSのプロダクトデザインを経験してきました。現在はGoensで、シニア向けマッチングサービスのグロースに注力しています。デザインだけでなく、ビジネス視点での施策立案、データ分析、UXリサーチ、フロントエンド開発まで担い、事業の成長に貢献してきました。
-          </p>
-          <div data-reveal class="flex flex-col gap-8">
-            <h3 class="text-2xl leading-snug font-bold text-gray-950">スキル</h3>
-            <dl class="grid gap-4 md:grid-cols-2">
-              {skills.map((skill) => (
-                <div class="flex flex-col gap-4 rounded-3xl bg-white p-8">
-                  <dt class="text-lg leading-snug font-bold text-gray-950">{skill.category}</dt>
-                  <dd>
-                    <TagList items={skill.items} />
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+  <Section id="profile" class="scroll-mt-8 bg-gray-50" title="Profile">
+    <div class="grid gap-12 md:grid-cols-3">
+      <Image data-reveal src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs rounded-lg" />
+      <div class="flex flex-col gap-12 md:col-span-2">
+        <p data-reveal class="text-base leading-loose">
+          イラストレーターを経て、広告代理店や事業会社でWeb・アプリ・SaaSのプロダクトデザインに携わってきました。現在はGoensのCXOとして、50代以上向けマッチングサービスのグロースに注力しています。デザインに加え、施策立案、データ分析、UXリサーチ、フロントエンド開発まで担い、事業の成長に貢献してきました。
+        </p>
+        <div data-reveal class="flex flex-col gap-8">
+          <h3 class="text-2xl leading-snug font-bold">スキル</h3>
+          <dl class="grid gap-4 md:grid-cols-2">
+            {skills.map((skill) => (
+              <div class="flex flex-col gap-4 rounded-3xl bg-white p-8">
+                <dt class="text-lg leading-snug font-bold">{skill.category}</dt>
+                <dd>
+                  <TagList items={skill.items} />
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </div>
-  </section>
+  </Section>
 
-  <section class="w-full bg-white">
-    <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
-      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
-        Career
-      </h2>
-      <ol class="flex flex-col gap-4">
-        {career.map((item) => (
-          <li data-reveal class="flex flex-col gap-2 rounded-3xl bg-gray-50 p-8 md:flex-row md:gap-8">
-            <p class="text-2xl leading-snug whitespace-nowrap text-gray-500 md:w-24 md:shrink-0">{item.period}</p>
-            <div class="flex flex-col gap-2">
-              <h3 class="text-2xl leading-snug font-bold text-gray-950">{item.company}</h3>
-              <p class="text-base leading-loose text-gray-950">{item.detail}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
+  <Section class="bg-white" title="Career">
+    <ol class="flex flex-col gap-4">
+      {career.map((item) => (
+        <li data-reveal class="flex flex-col gap-2 rounded-3xl bg-gray-50 p-8 md:flex-row md:gap-8">
+          <p class="text-2xl leading-snug whitespace-nowrap text-gray-500 md:w-24 md:shrink-0">{item.period}</p>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-2xl leading-snug font-bold">{item.company}</h3>
+            <p class="text-base leading-loose">{item.detail}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Section>
 
-  <section class="w-full bg-gray-50">
-    <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
-      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
-        Works
-      </h2>
-      <WorkGrid works={featured} />
-      <Button data-reveal href={url('works')} class="self-start">
-        すべてのWorksを見る
-      </Button>
-    </div>
-  </section>
+  <Section class="bg-gray-50" title="Works">
+    <WorkGrid works={featured} />
+    <Button data-reveal href={url('works')} class="self-start">
+      すべての事例を見る
+    </Button>
+  </Section>
 </Base>
