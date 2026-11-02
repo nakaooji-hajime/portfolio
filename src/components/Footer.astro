@@ -1,21 +1,63 @@
 ---
-import { SITE, url } from '../site';
+import { getCollection } from 'astro:content';
+import { NAV, SITE, url } from '../site';
+
+interface Props {
+  flush?: boolean;
+}
+
+const { flush = false } = Astro.props;
+
+const featured = (await getCollection('works', (work) => work.data.featured)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const groups = [
+  { heading: 'Menu', links: NAV },
+  { heading: 'Works', links: featured.map((work) => ({ label: work.data.title, href: url(`works/${work.id}`) })) },
+  {
+    heading: 'Contact',
+    links: [
+      { label: 'GitHub', href: SITE.github },
+      { label: '職務経歴書PDF', href: url(SITE.resumePdf) },
+    ],
+  },
+];
 ---
 
-<footer class="mt-24 border-t border-gray-200">
-  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-10 text-sm text-gray-600">
-    <p>© {SITE.name}</p>
-    <ul class="flex gap-6">
-      <li>
-        <a href={url('resume')} class="hover:text-gray-950 hover:underline">
-          Resume
-        </a>
-      </li>
-      <li>
-        <a href={SITE.github} class="hover:text-gray-950 hover:underline">
-          GitHub
-        </a>
-      </li>
-    </ul>
+<footer class:list={['bg-gray-950 text-white', !flush && 'mt-24']}>
+  <div class="mx-auto max-w-6xl px-6 pt-24 pb-10 md:pt-40">
+    <div class="grid gap-16 lg:grid-cols-2">
+      <div>
+        <p class="text-5xl leading-tight font-bold md:text-8xl md:leading-tight">
+          Nakaooji
+          <br />
+          Hajime
+        </p>
+        <p class="mt-6 leading-loose text-gray-300">新たな視点で成果に繋げるUI/UXデザイナー</p>
+      </div>
+      <div class="grid gap-12 sm:grid-cols-3">
+        {groups.map((group) => (
+          <nav aria-label={group.heading}>
+            <h2 class="text-sm text-gray-400">{group.heading}</h2>
+            <ul class="mt-4 space-y-3">
+              {group.links.map((link) => (
+                <li>
+                  <a href={link.href} class="hover:underline">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
+    </div>
+    <div class="mt-24 flex flex-wrap items-center justify-between gap-4 text-sm text-gray-400 md:mt-40">
+      <p>© {new Date().getFullYear()} Nakaooji Hajime</p>
+      <a href="#main" class="hover:text-white hover:underline">
+        ページ上部へ戻る
+      </a>
+    </div>
   </div>
 </footer>

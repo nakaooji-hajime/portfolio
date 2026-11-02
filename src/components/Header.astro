@@ -1,5 +1,5 @@
 ---
-import { SITE, url } from '../site';
+import { NAV, SITE, url } from '../site';
 
 interface Props {
   overlay?: boolean;
@@ -7,25 +7,19 @@ interface Props {
 
 const { overlay = false } = Astro.props;
 
-const nav = [
-  { label: 'Profile', href: url('#profile') },
-  { label: 'Works', href: url('works') },
-  { label: 'Vision', href: url('vision') },
-  { label: 'Resume', href: url('resume') },
-];
 const current = Astro.url.pathname;
 const isCurrent = (href: string) => current.startsWith(href);
-const fill = ['header-fill inline-block', overlay && 'header-fill-overlay'];
+const fill = ['text-fill inline-block', overlay && 'text-fill-overlay'];
 ---
 
-<header class:list={overlay ? 'hero-fade absolute inset-x-0 top-0 z-10 text-white' : 'border-b border-gray-200'}>
+<header class:list={[overlay && 'hero-fade absolute inset-x-0 top-0 z-10 text-white']}>
   <div class="mx-auto flex flex-wrap items-center justify-between gap-4 px-6 py-6">
     <a href={url()} class:list={[fill, 'font-bold tracking-wide']}>
       {SITE.name}
     </a>
     <nav aria-label="メイン">
       <ul class="flex gap-6 text-sm">
-        {nav.map((item) => (
+        {NAV.map((item) => (
           <li>
             <a
               href={item.href}

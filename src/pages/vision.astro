@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import Lead from '../components/Lead.astro';
 import PageHeader from '../components/PageHeader.astro';
+import PageSection from '../components/PageSection.astro';
+import PanelLink from '../components/PanelLink.astro';
 import ProvisionalNote from '../components/ProvisionalNote.astro';
 import { SITE } from '../site';
 
@@ -48,10 +51,7 @@ const files = [
       </PageHeader>
     </div>
 
-    <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
-        これから起こると考えていること
-      </h2>
+    <PageSection title="これから起こると考えていること">
       <ul class="mt-8 grid gap-4 md:mt-12 md:grid-cols-3">
         {forecasts.map((item) => (
           <li data-reveal class="bg-gray-100 p-8">
@@ -60,12 +60,9 @@ const files = [
           </li>
         ))}
       </ul>
-    </section>
+    </PageSection>
 
-    <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
-        だから、デザイナーとしてこうしていく
-      </h2>
+    <PageSection title="だから、デザイナーとしてこうしていく">
       <ol class="mt-8 divide-y divide-gray-200 border-y border-gray-200 md:mt-12">
         {actions.map((item, index) => (
           <li data-reveal class="grid gap-4 py-8 md:grid-cols-4 md:gap-8 md:py-12">
@@ -77,31 +74,25 @@ const files = [
           </li>
         ))}
       </ol>
-      <p data-reveal class="mt-8 leading-loose text-gray-700 md:mt-12 md:text-lg md:leading-loose">
+      <Lead class="mt-8 md:mt-12">
         ルールで開発の速度と品質を揃え、そこで生まれた時間を新しい施策の検討と検証に使う。この循環で、デザインを事業の成長につなげていきます。
-      </p>
-    </section>
+      </Lead>
+    </PageSection>
 
-    <section class="mt-24 md:mt-40">
-      <h2 data-reveal class="text-2xl font-bold text-gray-950 md:text-4xl">
-        すでに始めていること
-      </h2>
-      <p data-reveal class="mt-8 leading-loose text-gray-700 md:mt-12 md:text-lg md:leading-loose">
+    <PageSection title="すでに始めていること">
+      <Lead class="mt-8 md:mt-12">
         このサイトも、AIが守るルールと検査の仕組みを用意して制作しています。実際に使っているファイルを公開しています。
-      </p>
+      </Lead>
       <ul class="mt-8 grid gap-4 md:grid-cols-3">
         {files.map((file) => (
           <li data-reveal>
-            <a
-              href={`${SITE.repoFile}${file.name}`}
-              class="block h-full bg-gray-100 p-8 transition-colors hover:bg-gray-200"
-            >
+            <PanelLink href={`${SITE.repoFile}${file.name}`} class="block h-full">
               <span class="font-bold break-all text-gray-950 underline">{file.name}</span>
               <span class="mt-4 block text-sm leading-relaxed text-gray-700">{file.body}</span>
-            </a>
+            </PanelLink>
           </li>
         ))}
       </ul>
-    </section>
+    </PageSection>
   </div>
 </Base>

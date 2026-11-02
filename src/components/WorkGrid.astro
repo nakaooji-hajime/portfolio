@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import WorkCard from './WorkCard.astro';
+
+interface Props {
+  works: CollectionEntry<'works'>[];
+  class?: string;
+  // 件数が多い一覧で、広い画面を3列にする
+  dense?: boolean;
+}
+
+const { works, class: className, dense = false } = Astro.props;
+---
+
+<div class:list={['grid gap-8 md:grid-cols-2', dense && 'lg:grid-cols-3', className]}>
+  {works.map((work) => (
+    <div data-reveal>
+      <WorkCard work={work} />
+    </div>
+  ))}
+</div>

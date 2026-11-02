@@ -9,3 +9,10 @@ export const SITE = {
 };
 
 export const url = (path = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path}`;
+
+export const NAV = [
+  { label: 'Profile', href: url('#profile') },
+  { label: 'Works', href: url('works') },
+  { label: 'Vision', href: url('vision') },
+  { label: 'Resume', href: url('resume') },
+];

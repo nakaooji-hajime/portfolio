@@ -56,8 +56,8 @@
   animation: intro-logo 3s ease both;
 }
 
-/* ヘッダーのロゴとナビ。左半分が黒、右半分が元の色の背景を文字で切り抜き、ホバーで右へずらして黒を入れる */
-.header-fill {
+/* ヘッダーのロゴとナビ、Worksの見出し。左半分が黒、右半分が元の色の背景を文字で切り抜き、ホバーで右へずらして黒を入れる */
+.text-fill {
   --fill-base: var(--color-gray-500);
   background-image: linear-gradient(to right, var(--color-gray-950) 50%, var(--fill-base) 50%);
   background-position: 100% 0;
@@ -67,17 +67,30 @@
   transition: background-position 0.4s var(--ease-soft);
 }
 
-.header-fill-overlay {
+.text-fill-overlay {
   --fill-base: var(--color-white);
 }
 
-.header-fill:focus-visible {
+.text-fill:focus-visible {
   background-position: 0 0;
 }
 
 @media (hover: hover) {
-  .header-fill:hover {
+  .text-fill:hover,
+  .group:hover .text-fill {
     background-position: 0 0;
+  }
+
+  /* 文字数が多いぶん、ゆっくり染める */
+  .group .text-fill {
+    transition-duration: 0.7s;
+  }
+}
+
+/* ホバーのない端末では黒に染まらないので、最初から黒で読ませる */
+@media (hover: none) {
+  .text-fill-touch {
+    --fill-base: var(--color-gray-950);
   }
 }
 
@@ -110,19 +123,6 @@
 .js [data-reveal].is-in,
 .js .case-body > .is-in {
   opacity: 1;
-  transform: none;
-}
-
-.career-bar {
-  transform-origin: left;
-}
-
-.js .career-bar {
-  transform: scaleX(0);
-  transition: transform 1.2s var(--ease-soft) 0.2s;
-}
-
-.js .is-in .career-bar {
   transform: none;
 }
 
@@ -175,13 +175,12 @@
     animation: none;
   }
 
-  .header-fill {
+  .text-fill {
     transition: none;
   }
 
   .js [data-reveal],
-  .js .case-body > *,
-  .js .career-bar {
+  .js .case-body > * {
     opacity: 1;
     transform: none;
     transition: none;

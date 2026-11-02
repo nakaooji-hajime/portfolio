@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+
+const { class: className, ...attrs } = Astro.props;
+---
+
+<a
+  {...attrs}
+  class:list={[
+    'inline-block bg-gray-950 px-8 py-4 font-bold text-white transition-colors hover:bg-gray-700',
+    className,
+  ]}
+>
+  <slot />
+</a>
