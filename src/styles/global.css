@@ -19,10 +19,6 @@
   --font-sans: 'Plus Jakarta Sans Variable', 'Noto Sans JP Variable', sans-serif;
 }
 
-.case-body p {
-  @apply mt-6 leading-loose text-gray-700 md:text-lg md:leading-loose;
-}
-
 /* 演出 */
 :root {
   --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);

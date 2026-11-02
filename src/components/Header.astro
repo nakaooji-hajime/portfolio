@@ -13,12 +13,12 @@ const fill = ['text-fill inline-block', overlay && 'text-fill-overlay'];
 ---
 
 <header class:list={[overlay && 'hero-fade absolute inset-x-0 top-0 z-10 text-white']}>
-  <div class="mx-auto flex flex-wrap items-center justify-between gap-4 px-6 py-6">
-    <a href={url()} class:list={[fill, 'font-bold tracking-wide']}>
+  <div class="mx-auto flex flex-wrap items-center justify-between gap-4 px-6 py-8">
+    <a href={url()} class:list={[fill, 'font-bold']}>
       {SITE.name}
     </a>
     <nav aria-label="メイン">
-      <ul class="flex gap-6 text-sm">
+      <ul class="flex gap-8">
         {NAV.map((item) => (
           <li>
             <a

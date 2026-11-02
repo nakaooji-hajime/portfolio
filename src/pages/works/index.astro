@@ -9,24 +9,24 @@ const featured = works.filter((work) => work.data.featured);
 const others = works.filter((work) => !work.data.featured);
 ---
 
-<Base title="Works" description="UI/UXデザイナー中大路一が携わったプロダクトの一覧。" flushFooter>
-  <div class="bg-gray-50">
-    <div class="mx-auto max-w-6xl px-6 py-16 md:py-32">
+<Base title="Works" description="UI/UXデザイナー中大路一が携わったプロダクトの一覧。">
+  <section class="w-full bg-gray-50">
+    <div class="mx-auto flex max-w-6xl flex-col gap-24 px-6 py-24">
       <PageHeader lead="これまでに携わったプロダクトと、そこで生んだ成果をまとめています。">Works</PageHeader>
 
-      <section class="mt-16 md:mt-24">
-        <h2 data-reveal class="font-bold text-gray-950">
+      <section class="flex flex-col gap-8">
+        <h2 data-reveal class="text-2xl leading-snug font-bold text-gray-950">
           主要な事例
         </h2>
-        <WorkGrid works={featured} class="mt-8" />
+        <WorkGrid works={featured} />
       </section>
 
-      <section class="mt-24 md:mt-40">
-        <h2 data-reveal class="font-bold text-gray-950">
+      <section class="flex flex-col gap-8">
+        <h2 data-reveal class="text-2xl leading-snug font-bold text-gray-950">
           その他の事例
         </h2>
-        <WorkGrid works={others} dense class="mt-8" />
+        <WorkGrid works={others} dense />
       </section>
     </div>
-  </div>
+  </section>
 </Base>

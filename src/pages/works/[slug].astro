@@ -28,57 +28,58 @@ const { Content } = await render(work);
 
 <Base title={title} description={`${title} - ${subtitle}。${summary}`}>
   <article>
-    <div class="mx-auto max-w-6xl px-6 pt-8 md:pt-16">
-      <div data-reveal>
-        <Image src={thumbnail} alt={`${title}のサムネイル`} loading="eager" class="aspect-video w-full object-cover" />
-      </div>
-    </div>
-
-    <div class="mx-auto max-w-4xl px-6">
-      <div class="mt-12 md:mt-24">
-        <PageHeader>
-          {title}
-          <br />
-          {subtitle}
-        </PageHeader>
-      </div>
-      <ul data-reveal class="mt-8 space-y-1 text-sm leading-relaxed text-gray-600">
-        <li>所属: {company}</li>
-        <li>役割: {role}</li>
-        <li>制作時期: {workYear(period)}</li>
-      </ul>
-      {screenshot && (
-        <div data-reveal class="mt-12">
-          <Image src={screenshot} alt={`${title}の画面`} class="w-full" />
+    <section class="w-full bg-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
+        <Image
+          data-reveal
+          src={thumbnail}
+          alt={`${title}のサムネイル`}
+          loading="eager"
+          class="aspect-video w-full rounded-lg object-cover"
+        />
+        <div class="mx-auto flex w-full max-w-4xl flex-col gap-12">
+          <div class="flex flex-col gap-8">
+            <PageHeader>
+              {title}
+              <br />
+              {subtitle}
+            </PageHeader>
+            <ul data-reveal class="flex flex-col gap-1 text-xs leading-loose text-gray-500">
+              <li>所属: {company}</li>
+              <li>役割: {role}</li>
+              <li>制作時期: {workYear(period)}</li>
+            </ul>
+          </div>
+          {screenshot && <Image data-reveal src={screenshot} alt={`${title}の画面`} class="w-full rounded-lg" />}
+          <div class="case-body flex flex-col gap-8 text-base leading-loose text-gray-950">
+            <Content />
+          </div>
         </div>
-      )}
-      <div class="case-body mt-12">
-        <Content />
       </div>
-    </div>
+    </section>
 
-    <nav aria-label="前後のWorks" class="mx-auto mt-24 max-w-6xl px-6 md:mt-40">
-      <div data-reveal class="grid gap-4 md:grid-cols-2">
-        {prev ? (
-          <PanelLink href={url(`works/${prev.id}`)}>
-            <span class="text-sm">← 前の事例</span>
-            <span class="mt-2 block text-2xl font-bold">{prev.data.title}</span>
-          </PanelLink>
-        ) : (
-          <span class="hidden md:block" />
-        )}
-        {next && (
-          <PanelLink href={url(`works/${next.id}`)} class="text-right">
-            <span class="text-sm">次の事例 →</span>
-            <span class="mt-2 block text-2xl font-bold">{next.data.title}</span>
-          </PanelLink>
-        )}
-      </div>
-      <p class="mt-8 text-center">
-        <a href={url('works')} class="text-fill inline-block">
+    <section class="w-full bg-gray-50">
+      <nav aria-label="前後のWorks" class="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-24">
+        <div data-reveal class="grid gap-4 md:grid-cols-2">
+          {prev ? (
+            <PanelLink href={url(`works/${prev.id}`)}>
+              <span class="text-xs">← 前の事例</span>
+              <span class="text-2xl leading-snug font-bold">{prev.data.title}</span>
+            </PanelLink>
+          ) : (
+            <span class="hidden md:block" />
+          )}
+          {next && (
+            <PanelLink href={url(`works/${next.id}`)} class="items-end text-right">
+              <span class="text-xs">次の事例 →</span>
+              <span class="text-2xl leading-snug font-bold">{next.data.title}</span>
+            </PanelLink>
+          )}
+        </div>
+        <a href={url('works')} class="text-fill self-center">
           Works一覧へ戻る
         </a>
-      </p>
-    </nav>
+      </nav>
+    </section>
   </article>
 </Base>

@@ -4,8 +4,6 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
-import HomeSection from '../components/HomeSection.astro';
-import Lead from '../components/Lead.astro';
 import TagList from '../components/TagList.astro';
 import WorkGrid from '../components/WorkGrid.astro';
 import { career, skills } from '../data/career';
@@ -17,7 +15,7 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
 );
 ---
 
-<Base overlayHeader flushFooter>
+<Base overlayHeader>
   <script is:inline slot="head">
     try {
       if (sessionStorage.getItem('intro-seen')) document.documentElement.classList.add('intro-seen');
@@ -29,70 +27,85 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
 
   <Hero />
 
-  <section class="relative isolate overflow-hidden">
+  <section class="relative isolate w-full overflow-hidden bg-white">
     <canvas data-hero-light aria-hidden="true" class="absolute inset-0 -z-10 size-full"></canvas>
-    <div class="mx-auto max-w-6xl px-6 py-24 md:py-40">
-      <h2 data-reveal class="text-3xl leading-snug font-bold text-gray-950 md:text-6xl md:leading-snug">
+    <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
+      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
         前提を疑い、
         <br />
         新たな視点を大切に。
       </h2>
-      <Lead dark class="mt-8 max-w-2xl">
-        これまでのキャリアを振り返ると、大きな成果を生み出せたのは、いつも新しいことに挑戦したときでした。その業界や組織の中では思いつかず、AIのロジカルな改善提案からも出てこない。そんなアイデアに踏み出したときです。
-      </Lead>
-      <Lead dark class="mt-8 max-w-2xl">
-        「そんなことをやっていいんだっけ？」「やったことがないから分からない」。そうした声が上がる中で、数多くの失敗もしましたが、大きな成功も生むことができました。
-      </Lead>
-      <Lead dark class="mt-8 max-w-2xl">
-        だからこそ、前提を疑い、新たな視点を持ち込むことを大切にしながら、デザインに取り組んでいます。
-      </Lead>
+      <div class="flex max-w-4xl flex-col gap-8 text-base leading-loose text-gray-950">
+        <p data-reveal>
+          これまでのキャリアを振り返ると、大きな成果を生み出せたのは、いつも新しいことに挑戦したときでした。その業界や組織の中では思いつかず、AIのロジカルな改善提案からも出てこない。そんなアイデアに踏み出したときです。
+        </p>
+        <p data-reveal>
+          「そんなことをやっていいんだっけ？」「やったことがないから分からない」。そうした声が上がる中で、数多くの失敗もしましたが、大きな成功も生むことができました。
+        </p>
+        <p data-reveal>
+          だからこそ、前提を疑い、新たな視点を持ち込むことを大切にしながら、デザインに取り組んでいます。
+        </p>
+      </div>
     </div>
   </section>
 
-  <HomeSection id="profile" title="Profile" class="scroll-mt-8 bg-gray-50">
-    <div class="mt-12 grid gap-12 md:mt-20 md:grid-cols-3 md:gap-16">
-      <div data-reveal>
-        <Image src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs" />
-      </div>
-      <div class="md:col-span-2">
-        <Lead>
-          広告代理店や事業会社で、WEB・アプリ・SaaSのプロダクトデザインを経験してきました。現在はGoensで、シニア向けマッチングサービスのグロースに注力しています。デザインだけでなく、ビジネス視点での施策立案、データ分析、UXリサーチ、フロントエンド開発まで担い、事業の成長に貢献してきました。
-        </Lead>
-        <div data-reveal class="mt-8">
-          <h3 class="font-bold text-gray-950">スキル</h3>
-          <dl class="mt-4 grid gap-4 sm:grid-cols-2">
-            {skills.map((skill) => (
-              <div class="bg-white p-6">
-                <dt class="text-sm font-bold text-gray-950">{skill.category}</dt>
-                <dd class="mt-4">
-                  <TagList items={skill.items} />
-                </dd>
-              </div>
-            ))}
-          </dl>
+  <section id="profile" class="w-full scroll-mt-8 bg-gray-50">
+    <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
+      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
+        Profile
+      </h2>
+      <div class="grid gap-12 md:grid-cols-3">
+        <Image data-reveal src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs rounded-lg" />
+        <div class="flex flex-col gap-12 md:col-span-2">
+          <p data-reveal class="text-base leading-loose text-gray-950">
+            広告代理店や事業会社で、WEB・アプリ・SaaSのプロダクトデザインを経験してきました。現在はGoensで、シニア向けマッチングサービスのグロースに注力しています。デザインだけでなく、ビジネス視点での施策立案、データ分析、UXリサーチ、フロントエンド開発まで担い、事業の成長に貢献してきました。
+          </p>
+          <div data-reveal class="flex flex-col gap-8">
+            <h3 class="text-2xl leading-snug font-bold text-gray-950">スキル</h3>
+            <dl class="grid gap-4 md:grid-cols-2">
+              {skills.map((skill) => (
+                <div class="flex flex-col gap-4 rounded-3xl bg-white p-8">
+                  <dt class="text-lg leading-snug font-bold text-gray-950">{skill.category}</dt>
+                  <dd>
+                    <TagList items={skill.items} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </div>
-  </HomeSection>
+  </section>
 
-  <HomeSection title="Career" class="bg-white">
-    <ol class="mt-12 divide-y divide-gray-200 border-y border-gray-200 md:mt-20">
-      {career.map((item) => (
-        <li data-reveal class="flex flex-col gap-2 py-8 md:flex-row md:gap-6">
-          <p class="text-2xl whitespace-nowrap text-gray-600 md:w-24 md:shrink-0">{item.period}</p>
-          <div>
-            <h3 class="text-2xl font-bold text-gray-950">{item.company}</h3>
-            <p class="mt-2 leading-loose text-gray-700">{item.detail}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </HomeSection>
+  <section class="w-full bg-white">
+    <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
+      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
+        Career
+      </h2>
+      <ol class="flex flex-col gap-4">
+        {career.map((item) => (
+          <li data-reveal class="flex flex-col gap-2 rounded-3xl bg-gray-50 p-8 md:flex-row md:gap-8">
+            <p class="text-2xl leading-snug whitespace-nowrap text-gray-500 md:w-24 md:shrink-0">{item.period}</p>
+            <div class="flex flex-col gap-2">
+              <h3 class="text-2xl leading-snug font-bold text-gray-950">{item.company}</h3>
+              <p class="text-base leading-loose text-gray-950">{item.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
 
-  <HomeSection title="Works" class="bg-gray-50">
-    <WorkGrid works={featured} class="mt-12 md:mt-20" />
-    <p data-reveal class="mt-16 md:mt-24">
-      <Button href={url('works')}>すべてのWorksを見る</Button>
-    </p>
-  </HomeSection>
+  <section class="w-full bg-gray-50">
+    <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
+      <h2 data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-6xl">
+        Works
+      </h2>
+      <WorkGrid works={featured} />
+      <Button data-reveal href={url('works')} class="self-start">
+        すべてのWorksを見る
+      </Button>
+    </div>
+  </section>
 </Base>

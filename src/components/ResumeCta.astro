@@ -19,7 +19,7 @@ const thumbnails = [
 ];
 ---
 
-<section class="overflow-hidden bg-white py-24 md:py-40">
+<section class="w-full overflow-hidden bg-white py-24">
   <div data-reveal class="mask-b-from-20% mask-b-to-80%">
     <div class="marquee flex w-max">
       {[false, true].map((copy) => (
@@ -29,7 +29,7 @@ const thumbnails = [
               <Image
                 src={thumbnail.src}
                 alt={copy ? '' : `${thumbnail.title}のサムネイル`}
-                class="aspect-video w-full rounded-2xl object-cover md:rounded-3xl"
+                class="aspect-video w-full rounded-3xl object-cover"
               />
             </li>
           ))}
@@ -37,16 +37,14 @@ const thumbnails = [
       ))}
     </div>
   </div>
-  <div data-reveal class="relative -mt-8 px-6 text-center md:-mt-12">
-    <h2 class="text-xl leading-relaxed font-bold text-gray-950 md:text-3xl md:leading-relaxed">
+  <div data-reveal class="relative -mt-8 flex flex-col items-center gap-8 px-6 text-center md:-mt-12">
+    <h2 class="text-2xl leading-snug font-bold text-gray-950">
       職務履歴に具体的な成果、
       <br />
       その他の実績を記載しています
     </h2>
-    <p class="mt-8">
-      <Button href={url(SITE.resumePdf)} download>
-        職務履歴をダウンロード →
-      </Button>
-    </p>
+    <Button href={url(SITE.resumePdf)} download>
+      職務履歴をダウンロード →
+    </Button>
   </div>
 </section>

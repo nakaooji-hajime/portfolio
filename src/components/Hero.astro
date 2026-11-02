@@ -3,12 +3,12 @@ import { SITE } from '../site';
 ---
 
 <div class="intro fixed inset-0 z-50 grid place-items-center bg-white" aria-hidden="true">
-  <span class="intro-logo text-2xl font-bold tracking-wide text-gray-950 md:text-3xl">{SITE.name}</span>
+  <span class="intro-logo text-2xl leading-snug font-bold text-gray-950">{SITE.name}</span>
 </div>
-<section class="hero-bg relative flex h-svh min-h-96 flex-col justify-end overflow-hidden text-white">
+<section class="hero-bg relative flex h-svh min-h-96 flex-col justify-end overflow-hidden text-gray-50">
   <canvas data-hero-light aria-hidden="true" class="absolute inset-0 size-full touch-pan-y"></canvas>
-  <div class="relative mx-auto w-full px-6 pb-16 md:pb-24">
-    <h1 class="text-5xl leading-tight font-bold md:text-8xl md:leading-tight">
+  <div class="relative mx-auto flex w-full flex-col gap-8 px-6 pb-24">
+    <h1 class="text-4xl leading-snug font-bold md:text-8xl md:leading-snug">
       <span class="hero-line block overflow-hidden">
         <span style="--i:0">
           新たな視点を
@@ -24,6 +24,6 @@ import { SITE } from '../site';
         </span>
       </span>
     </h1>
-    <p class="hero-sub mt-6 text-sm tracking-wide md:text-2xl">{SITE.tagline}</p>
+    <p class="hero-sub text-base leading-loose md:text-lg">{SITE.tagline}</p>
   </div>
 </section>

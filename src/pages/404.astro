@@ -6,15 +6,15 @@ import { url } from '../site';
 ---
 
 <Base title="ページが見つかりません" hideResumeCta>
-  <div class="mx-auto max-w-4xl px-6 pt-16 md:pt-32">
-    <p data-reveal class="text-7xl font-bold text-gray-950 md:text-9xl">
-      404
-    </p>
-    <div class="mt-8">
+  <section class="w-full bg-white">
+    <div class="mx-auto flex max-w-4xl flex-col gap-12 px-6 py-24">
+      <p data-reveal class="text-4xl leading-snug font-bold text-gray-950 md:text-8xl">
+        404
+      </p>
       <PageHeader>ページが見つかりません</PageHeader>
+      <Button data-reveal href={url()} class="self-start">
+        ホームへ戻る
+      </Button>
     </div>
-    <p data-reveal class="mt-12">
-      <Button href={url()}>ホームへ戻る</Button>
-    </p>
-  </div>
+  </section>
 </Base>

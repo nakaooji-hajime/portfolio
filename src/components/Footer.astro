@@ -2,12 +2,6 @@
 import { getCollection } from 'astro:content';
 import { NAV, SITE, url } from '../site';
 
-interface Props {
-  flush?: boolean;
-}
-
-const { flush = false } = Astro.props;
-
 const featured = (await getCollection('works', (work) => work.data.featured)).sort(
   (a, b) => a.data.order - b.data.order,
 );
@@ -27,36 +21,34 @@ const groups = [
 ];
 ---
 
-<footer class:list={['hero-bg relative isolate overflow-hidden text-white', !flush && 'mt-24']}>
+<footer class="hero-bg relative isolate overflow-hidden text-gray-50">
   <canvas data-hero-light="solid" aria-hidden="true" class="absolute inset-0 -z-10 size-full"></canvas>
-  <div class="mx-auto max-w-6xl px-6 pt-24 pb-10 md:pt-40">
-    <div class="grid gap-16 lg:grid-cols-2">
-      <div>
-        <p class="text-5xl leading-tight font-bold md:text-8xl md:leading-tight">
-          Nakaooji
-          <br />
-          Hajime
-        </p>
-        <p class="mt-6 text-sm tracking-wide md:text-2xl">{SITE.tagline}</p>
-      </div>
-      <div class="grid gap-12 sm:grid-cols-3">
-        {groups.map((group) => (
-          <nav aria-label={group.heading}>
-            <h2 class="text-sm text-gray-400">{group.heading}</h2>
-            <ul class="mt-4 space-y-3">
-              {group.links.map((item) => (
-                <li>
-                  <a href={item.href} class={link}>
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ))}
-      </div>
+  <div class="mx-auto flex max-w-6xl flex-col gap-24 px-6 py-24">
+    <div class="flex flex-col gap-8">
+      <p class="text-4xl leading-snug font-bold md:text-8xl">
+        Nakaooji
+        <br />
+        Hajime
+      </p>
+      <p class="text-base leading-loose md:text-lg">{SITE.tagline}</p>
     </div>
-    <div class="mt-24 flex flex-wrap items-center justify-between gap-4 text-sm text-gray-400 md:mt-40">
+    <div class="grid gap-12 md:grid-cols-3">
+      {groups.map((group) => (
+        <nav aria-label={group.heading} class="flex flex-col gap-4">
+          <h2 class="text-xs text-gray-500">{group.heading}</h2>
+          <ul class="flex flex-col gap-4">
+            {group.links.map((item) => (
+              <li>
+                <a href={item.href} class={link}>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-500">
       <p>© {new Date().getFullYear()} Nakaooji Hajime</p>
       <a href="#main" class={link}>
         ページ上部へ戻る

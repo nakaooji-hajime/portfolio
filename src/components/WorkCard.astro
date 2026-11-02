@@ -12,22 +12,20 @@ const { work } = Astro.props;
 const { title, subtitle, role, period, thumbnail } = work.data;
 ---
 
-<article class="h-full">
-  <a
-    href={url(`works/${work.id}`)}
-    class="group flex h-full flex-col bg-white transition-transform duration-500 hover:scale-102"
-  >
-    <Image src={thumbnail} alt={`${title}のサムネイル`} class="aspect-video w-full object-cover" />
-    <div class="p-6 md:p-8">
-      <h3 class="text-lg leading-relaxed font-bold">
+<a
+  href={url(`works/${work.id}`)}
+  class="group flex h-full flex-col overflow-hidden rounded-3xl bg-white transition-transform duration-500 hover:scale-102"
+>
+  <Image src={thumbnail} alt={`${title}のサムネイル`} class="aspect-video w-full object-cover" />
+  <div class="flex flex-col gap-4 p-8">
+    <div class="flex flex-col gap-2">
+      <h3 class="text-lg leading-snug font-bold">
         <span class="text-fill inline-block">
           {title} - {subtitle}
         </span>
       </h3>
-      <p class="mt-2 text-sm text-gray-600">制作時期：{workYear(period)}</p>
-      <div class="mt-4">
-        <TagList items={role.split(' / ')} />
-      </div>
+      <p class="text-xs leading-loose text-gray-500">制作時期：{workYear(period)}</p>
     </div>
-  </a>
-</article>
+    <TagList items={role.split(' / ')} />
+  </div>
+</a>

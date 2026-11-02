@@ -6,14 +6,14 @@ import { SITE, url } from '../site';
 ---
 
 <Base title="Resume" description="中大路一の職務経歴書（PDF）。" hideResumeCta>
-  <div class="mx-auto max-w-4xl px-6 pt-16 md:pt-32">
-    <PageHeader lead="これまでの経歴、担当範囲、実績をまとめた職務経歴書をPDFでご覧いただけます。">
-      職務経歴書
-    </PageHeader>
-    <p data-reveal class="mt-12">
-      <Button href={url(SITE.resumePdf)} download>
+  <section class="w-full bg-white">
+    <div class="mx-auto flex max-w-4xl flex-col gap-12 px-6 py-24">
+      <PageHeader lead="これまでの経歴、担当範囲、実績をまとめた職務経歴書をPDFでご覧いただけます。">
+        職務経歴書
+      </PageHeader>
+      <Button data-reveal href={url(SITE.resumePdf)} download class="self-start">
         PDFをダウンロード
       </Button>
-    </p>
-  </div>
+    </div>
+  </section>
 </Base>

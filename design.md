@@ -1,90 +1,157 @@
-# design.md
+# Design System & Implementation Rules
 
-このサイトのデザインルール。実装するときは必ず従う。`npm run harness` で検査できる項目には「検査あり」と記す。
+## 運用ルール（必須遵守）
 
-## 原則
+以下のルールはすべて**MUST**とする。違反する場合は実装前に必ず承認を得ること。
+
+1. **スタイリング手法**
+   - 当サイトのスタイリングは**Tailwind CSSのみ**を使用すること
+   - Tailwind以外のCSSフレームワークの使用は禁止とする
+   - 独自classの定義、およびインラインスタイル（`style`属性）の使用は禁止とする
+   - 例外：後述「動き」の演出用class（`src/styles/global.css`）と、演出の順番を渡す `style="--i:0"` は既存のものに限り使用してよい
+
+2. **デザインシステム優先**
+   - 後述する「デザインシステム詳細」を最優先で遵守すること
+   - デザインシステムに定義されていない値・スタイルを使用する場合は、実装前に承認を得ること
+
+3. **Tailwindクラスの記述ルール**
+   - セクションは境界が分かるように交互に背景色を設定すること
+   - カスタム値（`[16px]` や `[1.35]` などの任意値）の使用は避けること
+   - 可能な限りTailwindの標準クラス（`text-base`、`leading-snug` など）を使用すること
+   - クラスの並び順は「上位概念→下位概念」の順とすること
+     例：`display` → `margin` → `font-size` → `leading` → `color`
+   - レスポンシブ指定は「デフォルト値 → ブレイクポイント指定」の順で記述すること
+     例：`text-base md:text-lg`
+   - grid-gapやflex-gapで優先しスタイリングし、marginは多用しないこと
+   - 簡素なdom構造を意識しすること
+
+4. **アクセシビリティ**
+   - WEBアクセシビリティを意識し、可能な限り遵守すること
+   - コントラスト比、キーボード操作、`focus-visible` などの基本的な配慮を行うこと
+   - 画像には内容が分かる代替テキストを付けること
+   - `prefers-reduced-motion` とWebGL非対応の環境では、動きなしで内容をすべて表示すること
+
+## デザインシステム詳細
+
+### 原則
 
 - 余白とタイポグラフィで階層を作る。装飾で目立たせない
-- 色味は作品画像に任せ、UIはgrayの濃淡で構成する。アクセントの `teal-400` は背景、オーバーレイ、演出にだけ使う
+- 色味は作品画像に任せ、UIはgrayの濃淡で構成する
 - ヘッダー、フッター、セクションの境界にボーダーを使わない。背景色の差と余白で区切る
 
-## 色
+### Color
 
-- 使用できるのは `gray-50`〜`gray-950`、`white`、アクセントの `teal-400` のみ（検査あり）
-- 文字の可読性と視認性はgrayで担保する。`teal-400` を文字色（`text-teal-400`）に使わない（検査あり）
+Light mode
 
-| 用途         | 色         |
-| ------------ | ---------- |
-| 背景         | `white`    |
-| 面の背景     | `gray-50`  |
-| 見出し、数値 | `gray-950` |
-| 本文         | `gray-700` |
-| 補足         | `gray-600` |
-| 罫線         | `gray-200` |
-| カード       | `white`    |
-| タグ         | `gray-100` |
-| アクセント   | `teal-400` |
+- Site background: `white`
+- Text: `gray-950`
+- Note: `gray-500`
+- Border: `gray-200`
+- Content bg, Modal bg: `gray-50`
+- Accent: `teal-400`
 
-- ホームの背景は、ProfileとWorksが `gray-50`、Careerが `white`
+Dark mode
 
-- 白背景の文字に `gray-400` 以下の薄い色を使わない（コントラストを確保するため）
+- Site background: `black`
+- Text: `gray-50`
+- Note: `gray-500`
+- Border: `gray-800`
+- Content bg, Modal bg: `gray-950`
+- Accent: `teal-400`
 
-## Tailwind
+使い方
 
-- 任意値（`w-[10px]` など）は使用しない（検査あり）
-- 既定のスケールにない値が必要になったら、任意値ではなくこのファイルのルールを見直す
+- セクションの背景は `white` と `gray-50` を交互にする（ホームはメッセージ `white` → Profile `gray-50` → Career `white` → Works `gray-50`）
+- コンテンツ（カード）の背景は、`white` のセクションでは `gray-50`、`gray-50` のセクションでは `white`
+- ファーストビューの暗い面の文字は `gray-50`
+- `teal-400` は背景、オーバーレイ、演出（ホバーの染め）にだけ使い、文字色（`text-teal-400`）には使わない
+- 白背景の文字に `gray-400` 以下の薄い色を使わない
 
-## タイポグラフィ
+### Typography
 
-- 英数字は Plus Jakarta Sans、日本語は Noto Sans JP
+Font
 
-| 用途                     | サイズ                    |
-| ------------------------ | ------------------------- |
-| ホームのキャッチコピー   | `text-5xl`、`md:text-7xl` |
-| 下層ページのh1           | `text-4xl`、`md:text-6xl` |
-| ホームのh2               | `text-4xl`、`md:text-6xl` |
-| ホームのメッセージ見出し | `text-3xl`、`md:text-5xl` |
-| 下層ページのh2           | `text-2xl`、`md:text-4xl` |
-| 補足                     | `text-sm`                 |
+- Japanese: Noto Sans JP
+- English: Plus Jakarta Sans
 
-- 本文の行間は `leading-loose`
+Font size（スマートフォン → `md:` 以上）
 
-## レイアウト
+- Site title: `text-4xl` → `md:text-8xl`
+- Section title: `text-4xl` → `md:text-6xl`
+- Content title: `text-2xl`
+- Strong: `text-lg`
+- Base: `text-base`
+- Note: `text-xs`
 
-- 一覧を含むページの幅は `max-w-6xl`、読み物のページの幅は `max-w-4xl`
-- 左右の余白は `px-6`
-- ホームのセクション間は `py-24`、`md:py-40`、下層ページのセクション間は `mt-24`、`md:mt-40`
+Font bold
+
+- Title, Strong: `font-bold`（700）
+- Base, Note: `font-normal`（400）
+
+Leading
+
+- Title, Strong: `leading-snug`
+- Base, Note: `leading-loose`
+
+### Style
+
+Break point
+
+- PC, Tablet: `md:`
 - スマートフォン幅では1カラムを基本にする
 
-## コンポーネント
+Max width
+
+- Section: `w-full`
+- Content - wide: `max-w-6xl`（一覧を含む中身）
+- Content - narrow: `max-w-4xl`（読み物、本文）
+
+Spacing
+
+- Section: `m-24`, `p-24`, `gap-24`
+- Content - wide: `m-12`, `p-12`, `gap-12`
+- Content - narrow: `m-8`, `p-8`, `gap-8`
+- Block - wide: `m-4`, `p-4`, `gap-4`
+- Block - narrow: `m-2`, `p-2`, `gap-2`
+- Tip: `m-1`, `p-1`, `gap-1`
+- 画面の左右の余白は `px-6`
+- ホームのセクションは上下 `py-24`、見出しと中身の間は `gap-12`
+
+Radius
+
+- Modal, Content: `rounded-3xl`
+- Default, Button: `rounded-lg`
+- Tip: `rounded-sm`
+
+Border
+
+- Default: `border`
+
+### Components
 
 - Astroコンポーネントで作る。JavaScriptは必要な箇所にだけ使う
-- 2箇所以上で同じ見た目を使う要素は、`src/components/` のコンポーネントを呼び出す（`Button`、`PanelLink`、`TagList`、`Lead`、`HomeSection`、`WorkGrid`）
-- 主要なボタンは `bg-gray-950` に `text-white`
-- 前後の事例へのパネル（`PanelLink`）は `white` の背景に `border-gray-200` の枠、文字は `gray-950`
+- 2箇所以上で同じ見た目を使う要素は、`src/components/` のコンポーネントを呼び出す
+- 主要なボタンは `bg-gray-950` に `text-white`、角は `rounded-lg`
 - テキストリンクの色は `white` か `gray-950` に統一し、grayの中間色にしない。下線は付けない
-- 画像には内容が分かる代替テキストを付ける
-- Worksのカードは `gray-50` の上に `white` で置き、画像、見出し、制作時期（`制作時期：2026年` のように年だけ）、担当範囲のタグの順に並べる。カード全体をリンクにする
-- Careerの年と会社名は `text-2xl`
+- Worksのカードは画像、見出し、制作時期（`制作時期：2026年` のように年だけ）、担当範囲のタグの順に並べ、カード全体をリンクにする
+- 事例の詳細ページは、サムネイル、見出し、メタ情報、スクリーンショット、本文の順に並べる。画像にボーダーを付けない
 
-## 動き
+### 動き
 
 - 演出は `src/styles/global.css` と `src/scripts/` にまとめる
-- ホームのファーストビュー: ロゴのフェード → キャッチコピー、マウスに追従するぼかしとノイズの光
+- ホームのファーストビュー：ロゴのフェード → キャッチコピー、マウスに追従するぼかしとノイズの光
 - ロゴの演出は、同じタブで開いている間は最初の1回だけ再生する
 - 光はgrayの濃淡で作り、中央だけ白くする。文字を避ける処理は入れない
-- ホームのメッセージの背景: ファーストビューの光を反転して使う。周囲を `white` に近づけ、最も濃い中央を `gray-300` までに抑える
-- フッターの背景: ファーストビューと同じ暗い面と光を使う。文字色とリンクの演出もファーストビューに合わせる
+- ホームのメッセージの背景：ファーストビューの光を反転して使う。周囲を `white` に近づけ、最も濃い中央を `gray-300` までに抑える
+- フッターの背景：ファーストビューと同じ暗い面と光を使う
 - 光はすべてのセクションで同じ座標を共有し、境目をまたいで移動させる。マウスが止まっても光を自動で動かさない
 - 2つのセクションの境界は常に動かない直線にする。光が境界を跨いだときだけ、その地点の線を水に垂らしたインクのように上下で混ぜ、約3秒で直線へ戻す
 - スクロールで表示する要素には `data-reveal` を付ける
-- サイト内のテキストリンク（ヘッダー、フッター、本文）はホバーで文字を左から `teal-400` に染める（`.text-fill`）。元の色はファーストビューとフッターの上で `white`、それ以外で `gray-950`
-- Worksのカードは、ホバーでカード全体を少し拡大し（`hover:scale-102`）、見出しの文字だけを左から `teal-400` に染める（`.group` の中の `.text-fill`）。画像は拡大せず、制作時期とタグは染めない
+- テキストリンクはホバーで文字を左から `teal-400` に染める（`.text-fill`）。元の色はファーストビューとフッターの上で `white`、それ以外で `gray-950`
+- Worksのカードは、ホバーでカード全体を少し拡大し（`hover:scale-102`）、見出しの文字だけを左から `teal-400` に染める。画像は拡大せず、制作時期とタグは染めない
 - ボタンとパネルは文字を変えず、ホバーで背景だけを左から `teal-400` に染める（`.bg-fill`）
-- フッター上の職務経歴書への導線: Worksのサムネイルを横に自動でループさせ、下へ `white` にフェードさせる
-- `prefers-reduced-motion` とWebGL非対応の環境では、動きなしで内容をすべて表示する
+- フッター上の職務経歴書への導線：Worksのサムネイルを横に自動でループさせ、下へ `white` にフェードさせる
 
-## 画像
+### 画像
 
 - `src/assets/` に置き、最適化を通す
-- 事例の詳細ページは、サムネイル、見出し、メタ情報、スクリーンショット、本文の順に並べる。画像にボーダーを付けない

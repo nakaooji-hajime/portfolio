@@ -1,16 +1,11 @@
 ---
 interface Props {
   class?: string;
-  // 背景に光を敷くセクションなど、本文より濃くしたい場合に指定する
-  dark?: boolean;
 }
 
-const { class: className, dark = false } = Astro.props;
+const { class: className } = Astro.props;
 ---
 
-<p
-  data-reveal
-  class:list={['leading-loose md:text-lg md:leading-loose', dark ? 'text-gray-950' : 'text-gray-700', className]}
->
+<p data-reveal class:list={['text-base leading-loose text-gray-950', className]}>
   <slot />
 </p>
