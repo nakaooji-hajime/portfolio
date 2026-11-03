@@ -1,4 +1,5 @@
 ---
+import Download from '@lucide/astro/icons/download';
 import Base from '../layouts/Base.astro';
 import Button from '../components/Button.astro';
 import PageHeader from '../components/PageHeader.astro';
@@ -12,7 +13,8 @@ import { SITE, url } from '../site';
         Resume
       </PageHeader>
       <Button data-reveal href={url(SITE.resumePdf)} download class="self-start">
-        PDFをダウンロード
+        職務経歴書をダウンロード
+        <Download aria-hidden="true" class="size-5" />
       </Button>
     </div>
   </section>

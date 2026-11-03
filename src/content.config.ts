@@ -17,6 +17,8 @@ const works = defineCollection({
       featured: z.boolean(),
       thumbnail: image(),
       screenshot: image().optional(),
+      figma: z.url().optional(),
+      website: z.url().optional(),
     }),
 });
 

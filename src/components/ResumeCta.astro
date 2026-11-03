@@ -1,4 +1,5 @@
 ---
+import Download from '@lucide/astro/icons/download';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Button from './Button.astro';
@@ -6,7 +7,7 @@ import inunavi from '../assets/works/inunavi-thumbnail.png';
 import erabel from '../assets/works/erabel-thumbnail.png';
 import datsumobijin from '../assets/works/datsumobijin-thumbnail.png';
 import edesupro from '../assets/works/edesupro-thumbnail.png';
-import { url } from '../site';
+import { SITE, url } from '../site';
 
 const works = (await getCollection('works')).sort((a, b) => a.data.order - b.data.order);
 
@@ -39,10 +40,13 @@ const thumbnails = [
   </div>
   <div data-reveal class="relative -mt-8 flex flex-col items-center gap-8 px-6 text-center md:-mt-12">
     <h2 class="text-2xl leading-snug font-bold">
-      職務経歴書に具体的な成果、
+      職務経歴書に具体的な成果
       <br />
       その他の実績を記載しています
     </h2>
-    <Button href={url('resume')}>職務経歴書をダウンロード →</Button>
+    <Button data-reveal href={url(SITE.resumePdf)} download>
+      職務経歴書をダウンロード
+      <Download aria-hidden="true" class="size-5" />
+    </Button>
   </div>
 </section>

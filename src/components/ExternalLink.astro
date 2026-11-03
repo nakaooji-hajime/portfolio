@@ -1,0 +1,23 @@
+---
+import ExternalLinkIcon from '@lucide/astro/icons/external-link';
+
+interface Props {
+  href: string;
+  // 暗い面の上に置く場合に指定する
+  overlay?: boolean;
+}
+
+const { href, overlay = false } = Astro.props;
+// アイコンは文字の切り抜き（.text-fill）で透明にならないよう、自分で色を持たせて染めずに表示する
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={['text-fill inline-flex items-center gap-1', overlay && 'text-fill-overlay']}
+>
+  <slot />
+  <span class="sr-only">（新しいタブで開く）</span>
+  <ExternalLinkIcon aria-hidden="true" class:list={['size-4 shrink-0', overlay ? 'text-white' : 'text-gray-950']} />
+</a>

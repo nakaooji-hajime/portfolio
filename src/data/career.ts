@@ -2,32 +2,32 @@ export const career = [
   {
     period: '2011年',
     company: 'フリーランス',
-    detail: 'イラストレーターとして、ゲームイラストやアニメーションを制作。',
+    detail: 'ミュージックビデオのアニメ制作など受託。',
   },
   {
     period: '2015年',
     company: '株式会社プラスワン',
-    detail: 'メディアはローンチ1年で月商300万円、コンサルティング事業は立ち上げ1年で年商2,000万円を達成。',
+    detail: 'コンサルティング事業の立ち上げ。ライフスタイル系比較サイトのグロース。',
   },
   {
     period: '2018年',
     company: '株式会社エイチームフィナジー',
-    detail: 'カードローン比較サイトのLPOで、半年で月商1億円を増収。10名規模のデザイン組織をマネジメント。',
+    detail: 'デザイン組織のマネジメント。金融系比較サイトのグロース。',
   },
   {
     period: '2021年',
     company: '株式会社PLAN-B',
-    detail: 'MA領域のSaaSでUI/UXとUXリサーチを担当。比較サイトのLPOでは、月商を30万円から100万円に増収。',
+    detail: 'MA領域のSaaSの立ち上げ。ライフスタイル系比較サイトのグロース。',
   },
   {
     period: '2022年',
     company: '株式会社エイチームライフデザイン',
-    detail: 'PMとして、メディアのドメイン統合と新ブランドの立ち上げを推進。社内にUXデザイナー職を新設。',
+    detail: '複数の比較サイトのドメイン統合と新ブランドの立ち上げ。',
   },
   {
     period: '2023年',
     company: 'Goens株式会社',
-    detail: 'CXOとして、50代以上向けマッチングサービスを統括。ローンチ3年で月商2,000万円、登録者数18万人を達成。',
+    detail: 'シニア向けマッチングサービスの立ち上げ。',
   },
 ];
 
@@ -53,5 +53,5 @@ export const skills: { category: string; items: { label: string; icon: SkillIcon
       { label: 'データ分析', icon: 'analytics' },
     ],
   },
-  { category: 'その他', items: [{ label: '職能マネジメント経験あり', icon: 'management' }] },
+  { category: 'その他', items: [{ label: '職能マネジメントの経験あり', icon: 'management' }] },
 ];

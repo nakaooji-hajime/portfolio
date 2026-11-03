@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import ExternalLink from './ExternalLink.astro';
 import { NAV, SITE, url } from '../site';
 
 const featured = (await getCollection('works', (work) => work.data.featured)).sort(
@@ -12,7 +13,7 @@ const groups = [
   { heading: 'Menu', links: NAV },
   { heading: 'Works', links: featured.map((work) => ({ label: work.data.title, href: url(`works/${work.id}`) })) },
   {
-    heading: 'Contact',
+    heading: 'Link',
     links: [
       { label: 'GitHub', href: SITE.github },
       { label: '職務経歴書PDF', href: url(SITE.resumePdf) },
@@ -39,9 +40,15 @@ const groups = [
           <ul class="flex flex-col gap-4">
             {group.links.map((item) => (
               <li>
-                <a href={item.href} class={link}>
-                  {item.label}
-                </a>
+                {item.href.startsWith('http') ? (
+                  <ExternalLink href={item.href} overlay>
+                    {item.label}
+                  </ExternalLink>
+                ) : (
+                  <a href={item.href} class={link}>
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>

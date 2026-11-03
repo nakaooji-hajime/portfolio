@@ -120,6 +120,14 @@
     transform 1s var(--ease-soft);
 }
 
+/* 表示の演出が付いたボタンでも、ホバーで背景を染める */
+.js [data-reveal].bg-fill {
+  transition:
+    opacity 1s var(--ease-soft),
+    transform 1s var(--ease-soft),
+    background-position 0.7s var(--ease-soft);
+}
+
 .js [data-reveal].is-in,
 .js .case-body > .is-in {
   opacity: 1;
@@ -188,6 +196,7 @@
   }
 
   .js [data-reveal],
+  .js [data-reveal].bg-fill,
   .js .case-body > * {
     opacity: 1;
     transform: none;
