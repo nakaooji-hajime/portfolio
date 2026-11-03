@@ -47,22 +47,16 @@ const { Content } = await render(work);
             <ul data-reveal class="flex flex-col gap-1 text-sm leading-loose text-gray-500">
               <li>担当：{role}</li>
               <li>会社：{company}</li>
-              <li class:list={[(figma || website) && 'mb-4 border-b border-gray-200 pb-4']}>
-                時期：{workYear(period)}
-              </li>
-              {figma && (
-                <li>
-                  <ExternalLink href={figma}>Figmaで見る</ExternalLink>
-                </li>
-              )}
-              {website && (
-                <li>
-                  <ExternalLink href={website}>{website.replace(/^https?:\/\/|\/$/g, '')}</ExternalLink>
-                </li>
-              )}
+              <li>時期：{workYear(period)}</li>
             </ul>
           </div>
-          {screenshot && <Image data-reveal src={screenshot} alt={`${title}の画面`} class="w-full rounded-lg" />}
+          <div class="flex flex-col gap-4">
+            {screenshot && <Image data-reveal src={screenshot} alt={`${title}の画面`} class="w-full rounded-lg" />}
+            <div class="flex flex-wrap gap-4 text-sm leading-loose text-gray-500" data-reveal>
+              {figma && <ExternalLink href={figma}>Figma</ExternalLink>}
+              {website && <ExternalLink href={website}>Webサイト</ExternalLink>}
+            </div>
+          </div>
           <div class="case-body flex flex-col gap-8">
             <Content />
           </div>
