@@ -120,6 +120,11 @@
     transform 1s var(--ease-soft);
 }
 
+/* 本文の箇条書きに点を付ける */
+.case-body ul {
+  @apply list-disc pl-6;
+}
+
 /* 表示の演出が付いたボタンでも、ホバーで背景を染める */
 .js [data-reveal].bg-fill {
   transition:

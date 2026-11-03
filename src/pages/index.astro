@@ -59,10 +59,13 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
         </p>
         <div data-reveal class="flex flex-col gap-8">
           <h3 class="text-2xl leading-snug font-bold">スキル</h3>
-          <dl class="grid gap-4 md:grid-cols-2">
+          <dl class="grid gap-2 md:grid-cols-2">
             {skills.map((skill) => (
-              <div class="flex flex-col gap-4 rounded-3xl bg-white p-8">
-                <dt class="text-2xl leading-snug font-bold">{skill.category}</dt>
+              <div class="flex flex-col gap-4 rounded-3xl bg-white px-8 pt-7 pb-8">
+                <dt class="flex items-center gap-2 text-lg leading-snug font-bold">
+                  <span aria-hidden="true" class="h-px w-4 shrink-0 rounded-full bg-teal-400"></span>
+                  {skill.category}
+                </dt>
                 <dd>
                   <TagList items={skill.items} />
                 </dd>
@@ -78,7 +81,10 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
     <ol class="flex flex-col gap-4">
       {career.map((item) => (
         <li data-reveal class="flex flex-col gap-2 rounded-3xl bg-gray-50 p-8 md:flex-row md:gap-8">
-          <p class="text-2xl leading-snug whitespace-nowrap text-gray-500 md:w-24 md:shrink-0">{item.period}</p>
+          <p class="flex items-center gap-2 self-start text-2xl leading-snug whitespace-nowrap text-gray-500 md:w-28 md:shrink-0">
+            <span aria-hidden="true" class="h-px w-4 shrink-0 rounded-full bg-teal-400"></span>
+            {item.period}
+          </p>
           <div class="flex flex-col gap-2">
             <h3 class="text-2xl leading-snug font-bold">{item.company}</h3>
             <p>{item.detail}</p>
