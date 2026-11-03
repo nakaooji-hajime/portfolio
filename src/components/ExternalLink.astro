@@ -8,16 +8,22 @@ interface Props {
 }
 
 const { href, overlay = false } = Astro.props;
-// アイコンは文字の切り抜き（.text-fill）で透明にならないよう、自分で色を持たせて染めずに表示する
+// アイコンは文字の切り抜き（.text-fill）で透明にならないよう自分で色を持ち、文字が染まり終わるころに線の色を変える
 ---
 
 <a
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class:list={['text-fill inline-flex items-center gap-1', overlay && 'text-fill-overlay']}
+  class:list={['group text-fill inline-flex items-center gap-1', overlay && 'text-fill-overlay']}
 >
   <slot />
   <span class="sr-only">（新しいタブで開く）</span>
-  <ExternalLinkIcon aria-hidden="true" class:list={['size-4 shrink-0', overlay ? 'text-white' : 'text-gray-950']} />
+  <ExternalLinkIcon
+    aria-hidden="true"
+    class:list={[
+      'size-4 shrink-0 transition-colors delay-200 duration-200 group-hover:stroke-teal-400 group-focus-visible:stroke-teal-400 motion-reduce:transition-none',
+      overlay ? 'text-white' : 'text-gray-950',
+    ]}
+  />
 </a>

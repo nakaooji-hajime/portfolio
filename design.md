@@ -52,9 +52,10 @@
 | Site title    | `text-4xl md:text-8xl` | `font-bold`   | `leading-snug`  |
 | Section title | `text-4xl md:text-6xl` | `font-bold`   | `leading-snug`  |
 | Content title | `text-2xl`             | `font-bold`   | `leading-snug`  |
-| Strong        | `text-lg`              | `font-bold`   | `leading-snug`  |
-| Base          | `text-base`            | `font-normal` | `leading-loose` |
-| Note          | `text-xs`              | `font-normal` | `leading-loose` |
+| Base          | `text-lg`              | `font-normal` | `leading-loose` |
+| Note          | `text-sm`              | `font-normal` | `leading-loose` |
+
+- Baseは `body` に指定してあるので、要素にはBase以外のときだけ指定する
 
 ## Style
 
@@ -66,10 +67,10 @@
 
 ## 部品
 
-- 主要なボタンは `bg-gray-950` に `text-white`
+- 主要なボタンは `bg-gray-950` に `text-white`。文字はBaseのサイズで `font-bold`
 - テキストリンクは `white` か `gray-950` にし、下線は付けない
 - 外部リンクは `ExternalLink` で、新しいタブで開き、外部リンクのアイコンを付ける
-- Worksのカードは、画像、見出し、制作時期（`制作時期：2026年` のように年だけ）、担当範囲のタグの順に並べ、カード全体をリンクにする
+- Worksのカードは、画像、見出し、時期（`時期：2026年` のように年だけ）、担当範囲のタグの順に並べ、カード全体をリンクにする
 - 事例の詳細ページは、サムネイル、見出し、メタ情報、スクリーンショット、本文の順に並べる。画像にボーダーを付けない
 
 ## 動き

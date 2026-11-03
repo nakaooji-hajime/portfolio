@@ -24,7 +24,7 @@ const { title, subtitle, role, period, thumbnail } = work.data;
           {title} - {subtitle}
         </span>
       </h3>
-      <p class="text-xs leading-loose text-gray-500">制作時期：{workYear(period)}</p>
+      <p class="text-sm leading-loose text-gray-500">時期：{workYear(period)}</p>
     </div>
     <TagList items={role.split(' / ')} />
   </div>

@@ -42,29 +42,28 @@ const { Content } = await render(work);
           <div class="flex flex-col gap-8">
             <PageHeader>
               {title}
-              <br />
-              {subtitle}
+              <span class="block text-2xl">{subtitle}</span>
             </PageHeader>
-            <ul data-reveal class="flex flex-col gap-1 text-xs leading-loose text-gray-500">
+            <ul data-reveal class="flex flex-col gap-1 text-sm leading-loose text-gray-500">
               <li>所属：{company}</li>
               <li>役割：{role}</li>
-              <li>制作時期：{workYear(period)}</li>
+              <li class:list={[(figma || website) && 'mb-4 border-b border-gray-200 pb-4']}>
+                時期：{workYear(period)}
+              </li>
               {figma && (
                 <li>
-                  Figma：
                   <ExternalLink href={figma}>Figmaで見る</ExternalLink>
                 </li>
               )}
               {website && (
                 <li>
-                  URL：
                   <ExternalLink href={website}>{website.replace(/^https?:\/\/|\/$/g, '')}</ExternalLink>
                 </li>
               )}
             </ul>
           </div>
           {screenshot && <Image data-reveal src={screenshot} alt={`${title}の画面`} class="w-full rounded-lg" />}
-          <div class="case-body flex flex-col gap-8 text-base leading-loose">
+          <div class="case-body flex flex-col gap-8">
             <Content />
           </div>
         </div>
@@ -76,7 +75,7 @@ const { Content } = await render(work);
         <div data-reveal class="grid gap-4 md:grid-cols-2">
           {prev ? (
             <PanelLink href={url(`works/${prev.id}`)}>
-              <span class="text-xs">← 前の事例</span>
+              <span class="text-sm leading-loose">← 前の事例</span>
               <span class="text-2xl leading-snug font-bold">{prev.data.title}</span>
             </PanelLink>
           ) : (
@@ -84,7 +83,7 @@ const { Content } = await render(work);
           )}
           {next && (
             <PanelLink href={url(`works/${next.id}`)} class="items-end text-right">
-              <span class="text-xs">次の事例 →</span>
+              <span class="text-sm leading-loose">次の事例 →</span>
               <span class="text-2xl leading-snug font-bold">{next.data.title}</span>
             </PanelLink>
           )}

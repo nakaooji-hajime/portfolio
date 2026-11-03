@@ -8,10 +8,7 @@ const { class: className, ...attrs } = Astro.props;
 
 <a
   {...attrs}
-  class:list={[
-    'bg-fill inline-flex items-center gap-2 rounded-lg px-8 py-4 text-lg leading-snug font-bold text-white',
-    className,
-  ]}
+  class:list={['bg-fill inline-flex items-center gap-2 rounded-lg px-8 py-2 font-bold text-white', className]}
 >
   <slot />
 </a>

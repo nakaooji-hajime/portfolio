@@ -31,12 +31,12 @@ const groups = [
         <br />
         Hajime
       </p>
-      <p class="text-base leading-loose md:text-lg">{SITE.tagline}</p>
+      <p>{SITE.tagline}</p>
     </div>
     <div class="grid gap-12 md:grid-cols-3">
       {groups.map((group) => (
         <nav aria-label={group.heading} class="flex flex-col gap-4">
-          <h2 class="text-xs text-gray-500">{group.heading}</h2>
+          <h2 class="text-sm leading-loose text-gray-500">{group.heading}</h2>
           <ul class="flex flex-col gap-4">
             {group.links.map((item) => (
               <li>
@@ -55,7 +55,7 @@ const groups = [
         </nav>
       ))}
     </div>
-    <div class="flex flex-wrap items-center justify-between gap-4 text-xs text-gray-500">
+    <div class="flex flex-wrap items-center justify-between gap-4 text-sm leading-loose text-gray-500">
       <p>© {new Date().getFullYear()} Nakaooji Hajime</p>
       <a href="#main" class={link}>
         ページ上部へ戻る↑

@@ -8,7 +8,7 @@ export const SITE = {
   noindex: true,
 };
 
-// Worksの期間（例: 2026年11月〜現在）から制作時期の年だけを取り出す
+// Worksの期間（例: 2026年11月〜現在）から時期の年だけを取り出す
 export const workYear = (period: string) => period.match(/^\d{4}年/)?.[0] ?? period;
 
 export const url = (path = '') => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path}`;

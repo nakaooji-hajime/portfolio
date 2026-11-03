@@ -36,7 +36,7 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
         <br />
         新たな視点を持ち込む。
       </h2>
-      <div class="flex max-w-4xl flex-col gap-8 text-base leading-loose">
+      <div class="flex max-w-4xl flex-col gap-8">
         <p data-reveal>
           キャリアを振り返ると、大きな成果につながったのは、いつも新しいことに挑戦したときでした。業界や組織の慣習からは思いつかず、ロジカルで規範的なAIの改善案からも出てこない。そんなアイデアに踏み出したときです。
         </p>
@@ -54,7 +54,7 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
     <div class="grid gap-12 md:grid-cols-3">
       <Image data-reveal src={profile} alt="中大路一のプロフィール写真" class="w-full max-w-xs rounded-lg" />
       <div class="flex flex-col gap-12 md:col-span-2">
-        <p data-reveal class="text-base leading-loose">
+        <p data-reveal>
           イラストレーターを経て、広告代理店や事業会社でWeb・アプリ・SaaSのプロダクトデザインに携わってきました。現在はGoensのCXOとして、シニア向けマッチングサービスのグロースに注力しています。デザインに加え、施策立案、データ分析、UXリサーチ、フロントエンド開発まで担い、事業の成長に貢献してきました。
         </p>
         <div data-reveal class="flex flex-col gap-8">
@@ -62,7 +62,7 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
           <dl class="grid gap-4 md:grid-cols-2">
             {skills.map((skill) => (
               <div class="flex flex-col gap-4 rounded-3xl bg-white p-8">
-                <dt class="text-lg leading-snug font-bold">{skill.category}</dt>
+                <dt class="text-2xl leading-snug font-bold">{skill.category}</dt>
                 <dd>
                   <TagList items={skill.items} />
                 </dd>
@@ -81,7 +81,7 @@ const featured = (await getCollection('works', (work) => work.data.featured)).so
           <p class="text-2xl leading-snug whitespace-nowrap text-gray-500 md:w-24 md:shrink-0">{item.period}</p>
           <div class="flex flex-col gap-2">
             <h3 class="text-2xl leading-snug font-bold">{item.company}</h3>
-            <p class="text-base leading-loose">{item.detail}</p>
+            <p>{item.detail}</p>
           </div>
         </li>
       ))}

@@ -23,7 +23,7 @@ const fill = ['text-fill inline-block', overlay && 'text-fill-overlay'];
           <li>
             <a
               href={item.href}
-              class:list={isCurrent(item.href) ? ['font-bold', overlay && 'text-white'] : fill}
+              class:list={[fill, isCurrent(item.href) && 'font-bold']}
               aria-current={isCurrent(item.href) ? 'page' : undefined}
             >
               {item.label}
