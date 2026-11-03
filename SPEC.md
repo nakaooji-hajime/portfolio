@@ -26,7 +26,7 @@
 /works/goens               個別ケーススタディ: Goens
 /works/shehub              個別ケーススタディ: SheHub
 /works/creditengine        個別ケーススタディ: CreditEngine
-/works/edes                個別ケーススタディ: Edes
+/works/edesu               個別ケーススタディ: Edesu
 /works/searchwrite         個別ケーススタディ: SearchWrite
 /works/castme              個別ケーススタディ: Castme
 /works/erabel              個別ケーススタディ: Erabel
