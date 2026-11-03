@@ -8,11 +8,9 @@ const works = defineCollection({
     z.object({
       title: z.string(),
       subtitle: z.string(),
-      summary: z.string(),
       company: z.string(),
       role: z.string(),
       period: z.string(),
-      category: z.string(),
       order: z.number(),
       featured: z.boolean(),
       thumbnail: image(),

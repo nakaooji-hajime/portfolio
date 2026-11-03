@@ -23,11 +23,11 @@ interface Props {
 }
 
 const { work, prev, next } = Astro.props;
-const { title, subtitle, summary, company, role, period, thumbnail, screenshot, figma, website } = work.data;
+const { title, subtitle, company, role, period, thumbnail, screenshot, figma, website } = work.data;
 const { Content } = await render(work);
 ---
 
-<Base title={title} description={`${title} - ${subtitle}。${summary}`}>
+<Base title={title} description={`${title} - ${subtitle}`}>
   <article>
     <section class="w-full bg-white">
       <div class="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-24">
@@ -45,8 +45,8 @@ const { Content } = await render(work);
               <span class="block text-2xl">{subtitle}</span>
             </PageHeader>
             <ul data-reveal class="flex flex-col gap-1 text-sm leading-loose text-gray-500">
-              <li>所属：{company}</li>
-              <li>役割：{role}</li>
+              <li>担当：{role}</li>
+              <li>会社：{company}</li>
               <li class:list={[(figma || website) && 'mb-4 border-b border-gray-200 pb-4']}>
                 時期：{workYear(period)}
               </li>
